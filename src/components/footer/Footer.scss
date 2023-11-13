@@ -1,0 +1,38 @@
+*{
+    margin : 0;
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: auto;
+
+    background-color : #101c5c;
+
+    box-sizing: border-box;
+    padding: 3vw;
+
+    .footerList{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .heading{
+        font-size: 1vw;
+        color: white;
+        font-weight: bold;
+    }
+
+    .link{
+        font-size: 0.8vw;
+        color: rgba(255, 255, 255, 0.879);
+        text-decoration: none;
+    }
+}
