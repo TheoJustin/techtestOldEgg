@@ -1,0 +1,25 @@
+.listItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding: 1vw;
+    box-sizing: border-box;
+
+    .icon{
+        aspect-ratio: 1;
+        height: 2vw;
+    }
+
+    div{
+        font-size: 1vw;
+        margin-left: 1vw;
+    }
+
+    .arrow{
+        position: absolute;
+        height: 1vw;
+        right: 1vw;
+    }
+}

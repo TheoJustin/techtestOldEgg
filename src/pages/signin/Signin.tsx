@@ -23,7 +23,13 @@ function Signin() {
       // Handle response here. For example:
       console.log("Sign in successful", response.data);
       // Redirect to another page or update the UI accordingly
-      navigate('/home');
+
+      // Extract email and first name
+
+      // Redirect and pass state
+      // console.log(response.data.email)
+      // console.log(response.data.first_name)
+      navigate('/home', { state: { email: response.data.email, firstName: response.data.first_name } });
     } catch (error) {
       console.error("Error during sign in:", error);
       // Handle error (e.g., show error message to user)
@@ -44,7 +50,7 @@ function Signin() {
     getUserData();
   }, []);
 
-  
+
   return (
     <div className="signin-container">
       <div className="form">

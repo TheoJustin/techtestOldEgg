@@ -10,7 +10,12 @@ import flag from './../../assets/icons/singapore.png';
 import notification from './../../assets/icons/bell.png';
 import location from './../../assets/icons/location.png';
 
-function Navbar() {
+
+type NavbarProps = {
+  firstName : string;
+};
+
+function Navbar(props : NavbarProps) {
   return (
     <div className='navbar'>
       <div className='topnav'>
@@ -45,7 +50,7 @@ function Navbar() {
           <img className='image' src={user} alt="" />
           <div className='double'>
             <div className='doubleTop'>Welcome</div>
-            <div className='doubleBot'>name</div>
+            <div className='doubleBot'>{props.firstName}</div>
           </div>
         </div>
         <div className='double'>
