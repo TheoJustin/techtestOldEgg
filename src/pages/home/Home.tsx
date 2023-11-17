@@ -21,6 +21,7 @@ function Home() {
   console.log(firstName);
 
   const [current, setCurrent] = React.useState(0);
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   React.useEffect(() => {
     const next = (current + 1) % 3;
@@ -42,7 +43,7 @@ function Home() {
 
   return (
     <div>
-      <Navbar firstName={firstName} />
+      <Navbar firstName={firstName}/>
       <div className="carousel-container">
         <div className="banner" style={{ left: `${-100 * current}%` }}>
           <div className="carousel-img">

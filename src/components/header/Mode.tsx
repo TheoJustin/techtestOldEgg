@@ -3,6 +3,11 @@ import './Mode.scss';
 import darkmode from './../../assets/icons/night-mode.png';
 import lightmode from './../../assets/icons/brightness.png';
 
+// type ModeProps = {
+//   isDarkMode: boolean;
+//   setIsDarkMode: (isDarkMode: boolean) => void;
+// };
+
 const Mode = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
