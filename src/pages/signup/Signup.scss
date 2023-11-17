@@ -18,30 +18,16 @@
         justify-content: center;
         align-items: center;
 
-        input {
-            padding: 2vh;
-            margin: 1vh;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            min-width: 20vw;
-
-            &:focus {
-                outline: none;
-                border-color: #007bff;
-            }
-        }
-
         button {
             padding: 2vh;
             margin: 1vh;
             border: 1px solid #ddd;
             border-radius: 4px;
             min-width: 22vw;
-
             background-color: #ffa43c;
             color: black;
-
             cursor: pointer;
+
             &:hover {
                 background-color: #ce8430;
             }
@@ -56,11 +42,11 @@
     flex-direction: row;
 }
 
-a{
+a {
     color: black;
 }
 
-.offer{
+.offer {
     display: flex;
     flex-direction: row;
 }
@@ -71,4 +57,21 @@ a{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+}
+
+.holder {
+    padding: 2vh;
+    margin: 1vh;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    &:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+}
+
+input[type="checkbox"] {
+    min-width: 0;
+    /* Additional styles for the checkbox can be added here if needed */
 }

@@ -7,6 +7,9 @@ import sbanner from "../../assets/banner/banner_2.jpg";
 import tbanner from "../../assets/banner/banner_3.jpg";
 import arrow from "./../../assets/icons/greater-than.png";
 import computer from "./../../assets/icons/computer.png";
+
+// import testbanner from 'https://i.ibb.co/71wMjNk/banner1.jpg';
+
 import { useLocation } from "react-router-dom";
 import "./Home.scss";
 
@@ -58,7 +61,10 @@ function Home() {
         </div>
         <div className="list">
           <ListItem desc="Components & Storage" url={computer} />
-          <ListItem desc="Components & Storage" url={computer} />
+          <ListItem desc="Computer Systems" url={computer} />
+          <ListItem desc="Computer Peripherals" url={computer} />
+          <ListItem desc="Electronics" url={computer} />
+          <ListItem desc="Gaming" url={computer} />
         </div>
         <div className="arrowContainer">
           <div className="arrow" onClick={goLeft}>
@@ -83,24 +89,24 @@ function Home() {
             <div className="rec">
               <div className="title">Recently Viewed Items</div>
               <div className="img-container">
-                <img src={computer} className="receimg" alt="" />
-                <img src={computer} className="receimg" alt="" />
+                <img src='https://i.ibb.co/MBKLWty/hs1.jpg' className="receimg" alt="" />
+                <img src='https://i.ibb.co/9whrF00/hub1.jpg' className="receimg" alt="" />
               </div>
             </div>
             <div className="rec">
               <div className="title">Recommended Categories</div>
               <div className="img-container">
                 <div className="product">
-                  <img src={computer} className="cateimg" alt="" />
-                  <div className="titleimg">tes1</div>
+                  <img src='https://i.ibb.co/9whrF00/hub1.jpg' className="cateimg" alt="" />
+                  <div className="titleimg">hub</div>
                 </div>
                 <div className="product">
-                  <img src={computer} className="cateimg" alt="" />
-                  <div className="titleimg">tes2</div>
+                  <img src='https://i.ibb.co/0q0jSLM/pc1.jpg' className="cateimg" alt="" />
+                  <div className="titleimg">pc1</div>
                 </div>
                 <div className="product">
-                  <img src={computer} className="cateimg" alt="" />
-                  <div className="titleimg">tes3</div>
+                  <img src='https://i.ibb.co/tDhL50j/pc2.jpg' className="cateimg" alt="" />
+                  <div className="titleimg">pc2</div>
                 </div>
               </div>
             </div>
