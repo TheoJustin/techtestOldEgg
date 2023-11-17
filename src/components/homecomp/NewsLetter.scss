@@ -1,0 +1,66 @@
+.background-news{
+
+    background-color: #f8fcfc;
+    width: 100%;
+    height: max-content;
+    padding: 3vw;
+
+    .newsletter{
+        background-color: #e8ecfc;
+        border-radius: 1vw;
+        width: 94vw;
+        padding: 3vw;
+        box-sizing: border-box;
+    
+        .titlenews{
+            font-weight: bold;
+            font-size: 1.8vw;
+            font-style: italic;
+            margin-bottom: 2vw;
+        }
+    
+        .signupnews{
+            font-weight: bold;
+            font-size: 1.2vw;
+            margin-bottom: 1vw;
+        }
+    
+        .input-text{
+            display: flex;
+            flex-direction: row;
+            border-radius: 1vw;
+            border: 1px white solid;
+            width: max-content;
+            height: 3vw;
+            margin-bottom: 1vw;
+    
+            .email{
+                color: rgb(38, 39, 38);
+                width: 20vw;
+                padding-left: 1vw;
+                border-radius: 1vw 0 0 1vw;
+            }
+    
+            .signuptext{
+                background-color: lightblue;
+                padding: 1vw;
+                width: 8vw;
+                height: 100%;
+                font-size: 0.8vw;
+                text-align: center;
+                transition: 0.5s ease;
+                border-radius: 0 1vw 1vw 0;
+                box-sizing: border-box;
+    
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+        }
+    
+        .deals{
+            color: rgb(53, 53, 159);
+            font-size: 1.2vw;
+        }
+    }
+}

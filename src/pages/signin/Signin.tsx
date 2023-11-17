@@ -57,8 +57,8 @@ function Signin() {
         <img src={logo} alt="" />
         <h2>Sign In</h2>
         <div className="formList">
-          <input type="text" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)}/>
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <input type="text" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} className="holder"/>
+          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="holder"/>
           <button onClick={handleSignIn} className="signin">
             SIGN IN
           </button>

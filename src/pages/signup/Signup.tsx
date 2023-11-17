@@ -4,6 +4,7 @@ import "./Signup.scss";
 import axios from "axios";
 import logo from "./../../assets/logo.png";
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -85,8 +86,8 @@ function Signup() {
             <input
               type="checkbox"
               name="isSubscribed"
-              className="none"
               onChange={handleChange}
+              className="check"
             />
             <div>Subscribe for exclusive e-mail offers and discounts</div>
           </div>
@@ -96,7 +97,7 @@ function Signup() {
         </form>
         <div className="signup">
           <p>Have an account?</p>
-          <a href="">Sign in</a>
+          <Link to="/">Sign in</Link>
         </div>
       </div>
     </div>

@@ -18,6 +18,10 @@
         justify-content: center;
         align-items: center;
 
+        input{
+            min-width: 0;
+        }
+
         button {
             padding: 2vh;
             margin: 1vh;
@@ -64,14 +68,10 @@ a {
     margin: 1vh;
     border: 1px solid #ddd;
     border-radius: 4px;
+    width: 20vw;
 
     &:focus {
         outline: none;
         border-color: #007bff;
     }
-}
-
-input[type="checkbox"] {
-    min-width: 0;
-    /* Additional styles for the checkbox can be added here if needed */
 }

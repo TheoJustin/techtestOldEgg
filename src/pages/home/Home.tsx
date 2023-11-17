@@ -12,6 +12,8 @@ import computer from "./../../assets/icons/computer.png";
 
 import { useLocation } from "react-router-dom";
 import "./Home.scss";
+import Newsletter from "../../components/homecomp/NewsLetter";
+import HomeProduct from "../../components/homecomp/HomeProduct";
 
 type HomeProps = {
   name: string;
@@ -113,6 +115,47 @@ function Home() {
           </div>
         </div>
       </div>
+
+      <div className="products-container">
+        <div className="products-title">FEATURED PRODUCTS</div>
+        <div className="thumbnail-container">
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+        </div>
+      </div>
+
+      <div className="products-container">
+        <div className="products-title">FEATURED BRANDS</div>
+        <div className="thumbnail-container">
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+        </div>
+      </div>
+
+      <div className="products-container">
+        <div className="products-title">TOP 3 SHOPS</div>
+        <div className="thumbnail-container">
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+          <HomeProduct/>
+        </div>
+      </div>
+
+      <Newsletter/>
       <Footer />
     </div>
   );
