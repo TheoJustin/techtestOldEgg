@@ -1,0 +1,32 @@
+.product-container{
+    margin: 1vw;
+    flex-grow: 1;
+
+    .home-image{
+        width: 100%;
+    }
+
+    .home-product-title{
+        font-size: 1.3vw;
+    }
+
+    .home-product-description{
+        color: red;
+        font-size: 1.1vw;
+    }
+
+    .home-money{
+        font-weight: bold;
+        font-size: 1.5vw;
+    }
+
+    .free-shipping{
+        font-style: italic;
+        color: #4d70c8;
+        font-weight: bold;
+    }
+
+    .home-category{
+        font-size: 0.8vw;
+    }
+}

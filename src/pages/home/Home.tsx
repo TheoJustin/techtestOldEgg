@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import axios from "axios";
 import Navbar from "../../components/header/Navbar";
 import Footer from "../../components/footer/Footer";
 import ListItem from "../../components/homecomp/ListItem";
@@ -14,11 +16,48 @@ import { useLocation } from "react-router-dom";
 import "./Home.scss";
 import Newsletter from "../../components/homecomp/NewsLetter";
 import HomeProduct from "../../components/homecomp/HomeProduct";
+import HomeBrand from "../../components/homecomp/HomeBrand";
+import HomeShop from "../../components/homecomp/HomeShop";
 
 type HomeProps = {
   name: string;
   email: string;
 };
+
+interface Product {
+  id: number;
+  name: string;
+  stars: number;
+  ratings: number;
+  quantity: number;
+  product_price: number;
+  shipping_price: number;
+  bought: number;
+  category: string;
+  urlproduct: string;
+  shop_id: number;
+}
+
+interface Brand {
+  brandID: number;
+  brandName: string;
+  brandURL: string;
+  soldProducts: number;
+}
+
+interface Shop {
+  id: number;
+  sales: number;
+  followers: number;
+  stars: number;
+  ratings: number;
+  urlBanner: string;
+  positive: boolean;
+  monthsCreated: number;
+  description: string;
+  shop_name: string;
+}
+
 
 function Home() {
   const location = useLocation();
@@ -27,6 +66,43 @@ function Home() {
 
   const [current, setCurrent] = React.useState(0);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
+
+  const [products, setProducts] = React.useState<Product[]>([]);
+  const [brands, setBrands] = React.useState<Brand[]>([]);
+  const [shops, setShops] = React.useState<Shop[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/products")
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the products!", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/brands")
+      .then((response) => {
+        setBrands(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the brands!", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/shops")
+      .then((response) => {
+        setShops(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the shops!", error);
+      });
+  }, []);
 
   React.useEffect(() => {
     const next = (current + 1) % 3;
@@ -46,9 +122,11 @@ function Home() {
     setCurrent((current + 1) % 3);
   };
 
+  console.log(brands);
+
   return (
     <div>
-      <Navbar firstName={firstName}/>
+      <Navbar firstName={firstName} />
       <div className="carousel-container">
         <div className="banner" style={{ left: `${-100 * current}%` }}>
           <div className="carousel-img">
@@ -91,23 +169,43 @@ function Home() {
             <div className="rec">
               <div className="title">Recently Viewed Items</div>
               <div className="img-container">
-                <img src='https://i.ibb.co/MBKLWty/hs1.jpg' className="receimg" alt="" />
-                <img src='https://i.ibb.co/9whrF00/hub1.jpg' className="receimg" alt="" />
+                <img
+                  src="https://i.ibb.co/MBKLWty/hs1.jpg"
+                  className="receimg"
+                  alt=""
+                />
+                <img
+                  src="https://i.ibb.co/9whrF00/hub1.jpg"
+                  className="receimg"
+                  alt=""
+                />
               </div>
             </div>
             <div className="rec">
               <div className="title">Recommended Categories</div>
               <div className="img-container">
                 <div className="product">
-                  <img src='https://i.ibb.co/9whrF00/hub1.jpg' className="cateimg" alt="" />
+                  <img
+                    src="https://i.ibb.co/9whrF00/hub1.jpg"
+                    className="cateimg"
+                    alt=""
+                  />
                   <div className="titleimg">hub</div>
                 </div>
                 <div className="product">
-                  <img src='https://i.ibb.co/0q0jSLM/pc1.jpg' className="cateimg" alt="" />
+                  <img
+                    src="https://i.ibb.co/0q0jSLM/pc1.jpg"
+                    className="cateimg"
+                    alt=""
+                  />
                   <div className="titleimg">pc1</div>
                 </div>
                 <div className="product">
-                  <img src='https://i.ibb.co/tDhL50j/pc2.jpg' className="cateimg" alt="" />
+                  <img
+                    src="https://i.ibb.co/tDhL50j/pc2.jpg"
+                    className="cateimg"
+                    alt=""
+                  />
                   <div className="titleimg">pc2</div>
                 </div>
               </div>
@@ -119,43 +217,33 @@ function Home() {
       <div className="products-container">
         <div className="products-title">FEATURED PRODUCTS</div>
         <div className="thumbnail-container">
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
+          {products.map((product) => (
+            <HomeProduct key={product.id} product={product} />
+          ))}
         </div>
       </div>
 
       <div className="products-container">
         <div className="products-title">FEATURED BRANDS</div>
         <div className="thumbnail-container">
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
+          <div className="thumbnail-container">
+            {brands.map((brand) => (
+              <HomeBrand key={brand.brandID} brand={brand} />
+            ))}
+          </div>
         </div>
       </div>
 
       <div className="products-container">
         <div className="products-title">TOP 3 SHOPS</div>
         <div className="thumbnail-container">
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
-          <HomeProduct/>
+          {shops.map((shop) => (
+            <HomeShop key={shop.id} shop={shop} />
+          ))}
         </div>
       </div>
 
-      <Newsletter/>
+      <Newsletter />
       <Footer />
     </div>
   );
