@@ -1,0 +1,24 @@
+.products-container{
+    width: 100%;
+    padding: 2vw;
+    box-sizing: border-box;
+
+    .products-title{
+        color: #09144f;
+        font-size: 2.5vw;
+        font-weight: bold;
+    }
+
+    .thumbnail-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+.shop-url{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

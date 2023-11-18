@@ -1,1 +1,90 @@
-    
+.shop-header{
+    width: 100%;
+    padding-left: 3vw;
+    box-sizing: border-box;
+
+    .shop-title{
+        font-weight: bold;
+        font-size: 1.8vw;
+        margin-bottom: 1vw;
+    }
+
+    .shop-description{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1vw;
+
+        .shop-desc-text{
+            font-size: 1.4vw;
+        }
+
+        .desc-spacer{
+            border: 1px solid black;
+            width: 0px;
+            height: 1.3vw;
+            margin-left: 0.5vw;
+            margin-right: 0.5vw;
+        }
+    }
+
+    .shop-btn{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 1vw;
+
+        .shop-follow{
+            border-radius: 1000px;
+            color: white;
+            background-color: #1946b8;
+            font-weight: bold;
+            font-size: 1.2vw;
+            padding-left: 0.7vw;
+            padding-right: 0.7vw;
+            padding-top: 0.3vw;
+            padding-bottom: 0.3vw;
+            margin-right: 2vw;
+        }
+
+        .shop-contact{
+            border-radius: 1000px;
+            border: 1px black solid;
+            font-weight: bold;
+            font-size: 1.2vw;
+            padding-left: 0.7vw;
+            padding-right: 0.7vw;
+            padding-top: 0.3vw;
+            padding-bottom: 0.3vw;
+        }
+    }
+}
+
+.shop-navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #f0f4fc;
+    padding: 1.5vw;
+    box-sizing: border-box;
+
+    .shop-navbar-text{
+
+        font-size: 1.2vw;
+        font-weight: bold;
+
+        &:hover{
+            color: orangered;
+            text-decoration: underline;    
+        }
+    }
+
+    .shop-navbar-spacer{
+        border: 1px solid darkslategrey;
+        width: 0px;
+        height: 1vw;
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+}
