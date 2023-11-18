@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./HomeProduct.scss";
 import computer from "./../../assets/icons/computer.png";
+import {useNavigate} from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -16,7 +18,29 @@ interface Product {
   shop_id: number;
 }
 
-const HomeProduct = ({ product }: { product: Product }) => {
+type NavbarProps = {
+  firstName: string;
+};
+
+
+const HomeProduct = ({ product, firstName }: { product: Product; firstName:string }) => {
+
+  const navigate = useNavigate();
+
+  const handleShopClick = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/shop/${product.shop_id}`);
+
+
+      // Navigate to Shop component with the fetched data
+      navigate('/shop', { state: { shopData: response.data, firstName:firstName } });
+    } catch (error) {
+      console.error('Error fetching shop data:', error);
+      // Handle error appropriately
+    }
+  };
+
+
   return (
     <div className="product-container">
         <img src={product.urlproduct || computer} alt={product.name} className="home-image"/>
@@ -25,7 +49,7 @@ const HomeProduct = ({ product }: { product: Product }) => {
         <div className="home-money">${product.product_price.toFixed(2)}</div>
         <div className="free-shipping">{product.shipping_price === 0 ? 'FREE SHIPPING' : `Shipping: $${product.shipping_price.toFixed(2)}`}</div>
         <div className="home-category">{product.category}</div>
-        <div className="home-category">{product.shop_id}</div>
+        <div className="home-click" onClick={handleShopClick}>Shop id : {product.shop_id}</div>
     </div>
   );
 };

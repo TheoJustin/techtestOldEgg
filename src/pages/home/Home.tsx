@@ -62,7 +62,6 @@ interface Shop {
 function Home() {
   const location = useLocation();
   const { email, firstName } = location.state || {};
-  console.log(firstName);
 
   const [current, setCurrent] = React.useState(0);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
@@ -122,7 +121,6 @@ function Home() {
     setCurrent((current + 1) % 3);
   };
 
-  console.log(brands);
 
   return (
     <div>
@@ -218,7 +216,7 @@ function Home() {
         <div className="products-title">FEATURED PRODUCTS</div>
         <div className="thumbnail-container">
           {products.map((product) => (
-            <HomeProduct key={product.id} product={product} />
+            <HomeProduct key={product.id} product={product} firstName={firstName}/>
           ))}
         </div>
       </div>
