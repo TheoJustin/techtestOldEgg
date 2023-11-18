@@ -212,7 +212,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="products-container">
+      <div className="home-products-container">
         <div className="products-title">FEATURED PRODUCTS</div>
         <div className="thumbnail-container">
           {products.map((product) => (
@@ -221,7 +221,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="products-container">
+      <div className="home-products-container">
         <div className="products-title">FEATURED BRANDS</div>
         <div className="thumbnail-container">
           <div className="thumbnail-container">
@@ -232,7 +232,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="products-container">
+      <div className="home-products-container">
         <div className="products-title">TOP 3 SHOPS</div>
         <div className="thumbnail-container">
           {shops.map((shop) => (

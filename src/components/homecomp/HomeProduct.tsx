@@ -42,7 +42,7 @@ const HomeProduct = ({ product, firstName }: { product: Product; firstName:strin
 
 
   return (
-    <div className="product-container">
+    <div className="home-product-container">
         <img src={product.urlproduct || computer} alt={product.name} className="home-image"/>
         <div className="home-product-title">{product.name}</div>
         <div className="home-product-description">Ratings: {product.ratings}</div>

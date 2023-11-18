@@ -17,7 +17,7 @@ interface Shop {
 
 const HomeShop = ({ shop }: { shop: Shop }) => {
   return (
-    <div className="product-container">
+    <div className="home-product-container">
       <img
         src={shop.urlBanner || computer}
         alt={shop.shop_name}

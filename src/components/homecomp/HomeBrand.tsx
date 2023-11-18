@@ -11,7 +11,7 @@ interface Brand {
 
 const HomeBrand = ({ brand }: { brand: Brand }) => {
   return (
-    <div className="product-container">
+    <div className="home-product-container">
       <div className="img-container">
         <img
           src={brand.brandURL || computer}
