@@ -1,0 +1,105 @@
+.product-detail-container{
+    display: flex;
+    flex-direction: row;
+    padding: 3vw;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-between;
+
+    .product-detail-img{
+        width: 25%;
+        margin-right: 1vw;
+    }
+
+    .product-detail-data{
+        width: 40%;
+        margin-right: 1vw;
+
+        .product-detail-title{
+            font-weight: bold;
+            font-size: 2vw;
+            margin-bottom: 2vw;
+        }
+
+        .product-detail-stars{
+            font-size: 1vw;
+            margin-bottom: 1vw;
+        }
+
+        .product-detail-quantity{
+            font-size: 1vw;
+            font-weight: bold;
+            margin-bottom: 1vw;
+        }
+
+        .product-detail-options-container{
+            
+            .product-detail-options-text{
+                font-size: 1.2vw;
+                font-weight: bold;
+            }
+
+            .product-detail-options-btn-container{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .product-detail-options-btn{
+                background-color: darkgray;
+                margin-right: 1vw;
+                color: rgb(79, 79, 79);
+            }
+
+            .product-detail-options-btn .selected{
+                background-color: rgb(117, 117, 117);
+                border-bottom: 2px solid orange;
+                color: black;
+            }
+        }
+    }
+
+    .product-detail-cart-container{
+        border: 3px solid grey;
+        border-radius: 3px;
+        width: 20%;
+        padding: 1vw;
+        box-sizing: border-box;
+
+        .product-detail-price{
+            font-weight: bold;
+
+            &:first-child{
+                font-size: 2vw;
+                margin-bottom: 1vw;
+            }
+
+            &:nth-child(2){
+                font-size: 1.3vw;
+                margin-bottom: 1vw;
+            }
+        }
+
+        .product-detail-cart{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin-bottom: 1vw;
+
+            .product-detail-cart-input{
+                margin-right: 0.5vw;
+                padding-left: 1vw;
+            }
+
+            .product-detail-cart-btn{
+                background-color: orange;
+                color: black;
+                flex-grow: 1;
+                border-radius: 1vw;
+                padding: 0.5vw;
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+    }
+
+}

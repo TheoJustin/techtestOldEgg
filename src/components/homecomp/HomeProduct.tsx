@@ -40,10 +40,23 @@ const HomeProduct = ({ product, firstName }: { product: Product; firstName:strin
     }
   };
 
+  const handleProductClick = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/product/${product.id}`);
+
+
+      // Navigate to Shop component with the fetched data
+      navigate('/product', { state: { productData: response.data, firstName:firstName } });
+    } catch (error) {
+      console.error('Error fetching shop data:', error);
+      // Handle error appropriately
+    }
+  };
+
 
   return (
     <div className="home-product-container">
-        <img src={product.urlproduct || computer} alt={product.name} className="home-image"/>
+        <img src={product.urlproduct || computer} alt={product.name} className="home-image" onClick={handleProductClick}/>
         <div className="home-product-title">{product.name}</div>
         <div className="home-product-description">Ratings: {product.ratings}</div>
         <div className="home-money">${product.product_price.toFixed(2)}</div>
