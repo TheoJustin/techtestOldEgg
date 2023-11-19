@@ -12,6 +12,7 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        margin-bottom: 2vw;
         
         .shop-review-title{
             font-weight: bold;
@@ -140,3 +141,101 @@
         }
     }
 }
+
+.shop-review-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  
+    .shop-review-item {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      background-color: #f9f9f9;
+  
+      .shop-review-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+  
+        h3 {
+          margin: 0;
+          font-size: 1.2em;
+          color: #333;
+        }
+  
+        div {
+          background-color: #ffc107;
+          color: white;
+          padding: 3px 8px;
+          border-radius: 3px;
+          font-weight: bold;
+        }
+      }
+  
+      .shop-review-item-body {
+        p {
+          margin: 0;
+          color: #555;
+        }
+      }
+  
+      .shop-review-item-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #666;
+  
+        span {
+          &:last-child {
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+  
+  .shop-review-helpfulness {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+
+    button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+
+      &.helpful-button {
+        background-color: #4CAF50; // Green background for helpful
+        color: white;
+
+        &:hover {
+          background-color: darken(#4CAF50, 10%);
+        }
+
+        &.active {
+          background-color: darken(#4CAF50, 20%);
+        }
+      }
+
+      &.unhelpful-button {
+        background-color: #f44336; // Red background for unhelpful
+        color: white;
+
+        &:hover {
+          background-color: darken(#f44336, 10%);
+        }
+
+        &.active {
+          background-color: darken(#f44336, 20%);
+        }
+      }
+    }
+  }

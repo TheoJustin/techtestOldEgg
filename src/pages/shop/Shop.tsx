@@ -2,15 +2,25 @@ import React from "react";
 import axios from "axios";
 import "./Shop.scss";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "../../components/header/Navbar";
 import Footer from "../../components/footer/Footer";
 import ShopStore from "../../components/shopcomp/store/ShopStore";
 import ShopProducts from "../../components/shopcomp/products/ShopProducts";
 import ShopReview from "../../components/shopcomp/reviews/ShopReview";
+import ShopAboutUs from "../../components/shopcomp/aboutus/ShopAboutUs";
 
 function Shop() {
   const location = useLocation();
   const { shopData, firstName } = location.state || {};
+
+  const [activeComponent, setActiveComponent] = useState('store');
+
+  const showStore = () => setActiveComponent('store');
+  const showProducts = () => setActiveComponent('products');
+  const showReviews = () => setActiveComponent('reviews');
+  const showAboutUs = () => setActiveComponent('aboutUs');
+
   return (
     <div className="">
       <Navbar firstName={firstName} />
@@ -38,21 +48,21 @@ function Shop() {
       
 
       <div className="shop-navbar">
-        <div className="shop-navbar-text">Store Home</div>
+        <div className="shop-navbar-text" onClick={showStore}>Store Home</div>
         <div className="shop-navbar-spacer"></div>
-        <div className="shop-navbar-text">All Products</div>
+        <div className="shop-navbar-text" onClick={showProducts}>All Products</div>
         <div className="shop-navbar-spacer"></div>
-        <div className="shop-navbar-text">Reviews</div>
+        <div className="shop-navbar-text" onClick={showReviews}>Reviews</div>
         <div className="shop-navbar-spacer"></div>
         <div className="shop-navbar-text">Return Policy</div>
         <div className="shop-navbar-spacer"></div>
-        <div className="shop-navbar-text">About Us</div>
+        <div className="shop-navbar-text" onClick={showAboutUs}>About Us</div>
       </div>
 
-
-      {/* <ShopStore/> */}
-      {/* <ShopProducts/> */}
-      <ShopReview/>
+      {activeComponent === 'store' && <ShopStore />}
+      {activeComponent === 'products' && <ShopProducts />}
+      {activeComponent === 'reviews' && <ShopReview />}
+      {activeComponent === 'aboutUs' && <ShopAboutUs />}
 
       <Footer />
     </div>
