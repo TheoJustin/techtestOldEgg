@@ -1,0 +1,29 @@
+.user-details-container{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5vw;
+    padding-left: 10vw;
+    box-sizing: border-box;
+
+    .user-details-navbar{
+        margin-right: 20vw;
+
+        .user-details-title{
+            font-weight: bold;
+            font-size: 2vw;
+            margin-bottom: 3vw;
+            text-transform: uppercase;
+        }
+
+        .user-details-navbar-option{
+            .user-details-navbar-option-title{
+                font-weight: bold;
+                margin-bottom: 1.5vw;
+            }
+
+            .user-details-navbar-option-btn{
+                margin-bottom: 1.5vw;
+            }
+        }
+    }
+}

@@ -8,6 +8,7 @@ import Home from './pages/home/Home';
 import Shop from './pages/shop/Shop';
 import ProductDetail from './pages/product/ProductDetail';
 import UserDetails from './pages/user/UserDetails';
+import Wishlist from './pages/wishlist/Wishlist';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/shop" element={<Shop/>} />
           <Route path='/product' element={<ProductDetail/>}/>
           <Route path='/user' element={<UserDetails/>}/>
+          <Route path='/wishlist' element={<Wishlist/>}/>
         </Routes>
       </Router>
     </div>
