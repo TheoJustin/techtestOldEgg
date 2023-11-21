@@ -1,4 +1,5 @@
 import React from 'react';
+import './WishlistItem.scss';
 
 // Assuming these interfaces are in the same file. If not, import them.
 interface User {
@@ -42,14 +43,14 @@ interface WishlistItemProps {
 const WishlistItemComponent = ({ item }: WishlistItemProps) => {
     return (
         <div className="wishlist-item">
-            <h2>{item.product.name}</h2>
-            <img src={item.product.urlproduct} alt={item.product.name} />
-            <p>Quantity: {item.quantity}</p>
-            <p>Notes: {item.notes}</p>
-            <p>Added on: {new Date(item.created_date).toLocaleDateString()}</p>
-            <p>Price: ${item.product.product_price.toFixed(2)}</p>
-            <p>Category: {item.product.category}</p>
-            <p>User: {item.user.first_name} {item.user.last_name}</p>
+            <h2 className="wishlist-item-title">{item.product.name}</h2>
+            <img className="wishlist-item-image" src={item.product.urlproduct} alt={item.product.name} />
+            <p className="wishlist-item-quantity">Quantity: {item.quantity}</p>
+            <p className="wishlist-item-notes">Notes: {item.notes}</p>
+            <p className="wishlist-item-date">Added on: {new Date(item.created_date).toLocaleDateString()}</p>
+            <p className="wishlist-item-price">Price: ${item.product.product_price.toFixed(2)}</p>
+            <p className="wishlist-item-category">Category: {item.product.category}</p>
+            <p className="wishlist-item-user">User: {item.user.first_name} {item.user.last_name}</p>
         </div>
     );
 };

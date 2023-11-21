@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   async function handleSignIn() {
@@ -22,16 +23,16 @@ function Signin() {
       });
       // Handle response here. For example:
       console.log("Sign in successful", response.data);
-      // Redirect to another page or update the UI accordingly
 
-      // Extract email and first name
-
-      // Redirect and pass state
-      // console.log(response.data.email)
-      // console.log(response.data.first_name)
+      if (response.data.isBanned) {
+        setErrorMessage('Your account has been banned.');
+        return; // Stop the function here to prevent navigation
+      }
+      
       navigate('/home', { state: { email: response.data.email, firstName: response.data.first_name } });
     } catch (error) {
       console.error("Error during sign in:", error);
+      setErrorMessage('Invalid credentials. Please try again.');
       // Handle error (e.g., show error message to user)
     }
   }
@@ -56,6 +57,7 @@ function Signin() {
       <div className="form">
         <img src={logo} alt="" />
         <h2>Sign In</h2>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="formList">
           <input type="text" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} className="holder"/>
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="holder"/>
