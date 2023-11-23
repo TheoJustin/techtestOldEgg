@@ -2,16 +2,6 @@ import React from 'react';
 import './WishlistItem.scss';
 
 // Assuming these interfaces are in the same file. If not, import them.
-interface User {
-    id: number;
-    first_name: string;
-    last_name: string;
-    email: string;
-    mobile_phone: string;
-    password: string;
-    is_subscribed: boolean;
-}
-
 interface Product {
     id: number;
     name: string;
@@ -26,28 +16,21 @@ interface Product {
     shop_id: number;
 }
 
-interface WishlistItem {
-    wishlist_id: number;
-    user: User;
-    product: Product;
-    quantity: number;
-    notes: string;
-    option:string;
-    created_date: string;
-}
-
-// Define WishlistItemProps
+// // Define WishlistItemProps
 interface WishlistItemProps {
-    item: WishlistItem;
+    item: Product;
 }
 
 const WishlistItemComponent = ({ item }: WishlistItemProps) => {
     return (
         <div className="wishlist-item">
-            <img className="wishlist-item-image" src={item.product.urlproduct} alt={item.product.name} />
-            <h2 className="wishlist-item-title">{item.product.name} [{item.option}]</h2>
+                <div key={item.id}>
+                    <img className="wishlist-item-image" src={item.urlproduct} alt={item.name} />
+                    <h2 className="wishlist-item-title">{item.name}</h2>
+                </div>
         </div>
     );
 };
+
 
 export default WishlistItemComponent;

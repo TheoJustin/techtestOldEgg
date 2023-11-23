@@ -39,7 +39,8 @@ export interface Product {
 export interface WishlistItem {
   wishlist_id: number;
   user: User;
-  product: Product;
+  products: Product[];
+  name: string;
   quantity: number;
   option: string;
   notes: string;
@@ -130,13 +131,60 @@ const Wishlist = () => {
   const applyFiltersAndSorting = () => {
     return wishlist
       .filter((item) => {
-        const meetsRating =
-          filterRating === 0 || item.product.stars >= filterRating;
-        const meetsPrice =
-          filterPrice === "all" ||
-          (Array.isArray(filterPrice) &&
-            item.product.product_price >= filterPrice[0] &&
-            item.product.product_price <= filterPrice[1]);
+        let meetsRating = true;
+        if (filterRating > 0) {
+          for (let index = 0; index < item.products.length; index++) {
+            if (item.products[index].stars < filterRating) {
+              meetsRating = false;
+              break;
+            }
+          }
+        }
+
+        let meetsPrice = true;
+        if (filterPrice != "all") {
+          for (let index = 0; index < item.products.length; index++) {
+            switch (filterPrice) {
+              case "0-50":
+                if (
+                  item.products[index].product_price < 0 &&
+                  item.products[index].product_price > 50
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+              case "50-100":
+                if (
+                  item.products[index].product_price < 50 &&
+                  item.products[index].product_price > 100
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+              case "100-150":
+                if (
+                  item.products[index].product_price < 100 &&
+                  item.products[index].product_price > 150
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+              case "150-200":
+                if (
+                  item.products[index].product_price < 150 &&
+                  item.products[index].product_price > 200
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+            }
+
+            if (meetsPrice == false) {
+              break;
+            }
+          }
+        }
+
         return meetsRating && meetsPrice;
       })
       .sort((a, b) => {
@@ -163,33 +211,91 @@ const Wishlist = () => {
   const applyFiltersAndSortingForPublic = () => {
     return publicWishlist
       .filter((item) => {
-        const isPublic = item.option === "public"; // Check if the option is 'public'
-        const meetsRating =
-          filterRating === 0 || item.product.stars >= filterRating;
-        const meetsPrice =
-          filterPrice === "all" ||
-          (Array.isArray(filterPrice) &&
-            item.product.product_price >= filterPrice[0] &&
-            item.product.product_price <= filterPrice[1]);
-        return isPublic && meetsRating && meetsPrice; // Include the isPublic check in the return statement
+        let meetsRating = true;
+        if (filterRating > 0) {
+          for (let index = 0; index < item.products.length; index++) {
+            if (item.products[index].stars < filterRating) {
+              meetsRating = false;
+              break;
+            }
+          }
+        }
+
+        let meetsPrice = true;
+        if (filterPrice != "all") {
+          for (let index = 0; index < item.products.length; index++) {
+            switch (filterPrice) {
+              case "0-50":
+                if (
+                  item.products[index].product_price < 0 &&
+                  item.products[index].product_price > 50
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+              case "50-100":
+                if (
+                  item.products[index].product_price < 50 &&
+                  item.products[index].product_price > 100
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+              case "100-150":
+                if (
+                  item.products[index].product_price < 100 &&
+                  item.products[index].product_price > 150
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+              case "150-200":
+                if (
+                  item.products[index].product_price < 150 &&
+                  item.products[index].product_price > 200
+                ) {
+                  meetsPrice = false;
+                }
+                break;
+            }
+
+            if (meetsPrice == false) {
+              break;
+            }
+          }
+        }
+
+        return meetsRating && meetsPrice;
       })
       .sort((a, b) => {
         if (sortBy === "dateDesc") {
+          // Descending order
           return (
             new Date(b.created_date).getTime() -
             new Date(a.created_date).getTime()
           );
         } else if (sortBy === "dateAsc") {
+          // Ascending order
           return (
             new Date(a.created_date).getTime() -
             new Date(b.created_date).getTime()
           );
         }
+
         return 0;
       });
   };
 
   const filteredAndSortedPublicWishlist = applyFiltersAndSortingForPublic();
+
+  type ActiveView = "myLists" | "followedList" | "publicList";
+
+  const [activeView, setActiveView] = useState("myLists"); // New state to track the active view
+
+  // Function to change the active view
+  const handleViewChange = (view : ActiveView) => {
+    setActiveView(view);
+  };
 
   return (
     <div>
@@ -197,9 +303,9 @@ const Wishlist = () => {
       <div className="wishlist-page">
         <h1 className="wishlist-title">Wishlist</h1>
         <div className="wishlist-menu">
-          <button className="menu-item my-lists">My Lists</button>
-          <button className="menu-item followed-list">Followed List</button>
-          <button className="menu-item public-list">Public List</button>
+          <button className="menu-item my-lists" onClick={() => handleViewChange("myLists")}>My Lists</button>
+          <button className="menu-item followed-list" onClick={() => handleViewChange("followedList")}>Followed List</button>
+          <button className="menu-item public-list" onClick={() => handleViewChange("publicList")}>Public List</button>
         </div>
         <div className="wishlist-filters">
           <div className="filter-rating">
@@ -235,27 +341,17 @@ const Wishlist = () => {
             </select>
           </div>
 
-          <WishlistContainer wishlist={filteredAndSortedWishlist} />
-
-          {publicWishlist.map((item) => (
-            <WishlistContainer wishlist={filteredAndSortedPublicWishlist}/>
+          {activeView === "myLists" && wishlist.map((item) => (
+            <WishlistContainer key={item.wishlist_id} wishlist={item} />
           ))}
 
-          {/* <div className="wishlistItemContainer">
-            {filteredAndSortedWishlist.map((item) => (
-              <WishlistItemComponent key={item.wishlist_id} item={item} />
-            ))}
-          </div>
-          <div className="wishlistItemContainer">
-            {filteredAndSortedPublicWishlist.map((item) => (
-              <WishlistItemComponent key={item.wishlist_id} item={item} />
-            ))}
-          </div>
-          <div className="wishlistItemContainer">
-            {followerData.map((item) => (
-              <WishlistFollower key={item.id} item={item} />
-            ))}
-          </div> */}
+          {activeView === "followedList" && followerData.map((item) => (
+            <WishlistFollower key={item.id} item={item} />
+          ))}
+
+          {activeView === "publicList" && publicWishlist.map((item) => (
+            <WishlistContainer key={item.wishlist_id} wishlist={item} />
+          ))}
         </div>
       </div>
       <Footer />
