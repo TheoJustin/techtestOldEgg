@@ -9,6 +9,7 @@ import Shop from './pages/shop/Shop';
 import ProductDetail from './pages/product/ProductDetail';
 import UserDetails from './pages/user/UserDetails';
 import Wishlist from './pages/wishlist/Wishlist';
+import WishlistDetail from './components/wishlistcomp/WishlistDetail';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/product' element={<ProductDetail/>}/>
           <Route path='/user' element={<UserDetails/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
+          <Route path='/wishlist-detail' element={<WishlistDetail/>}/>
         </Routes>
       </Router>
     </div>
