@@ -50,26 +50,8 @@ export interface WishlistItem {
 export interface FollowerData {
   id: number;
   follow_date: string;
-  follower_first_name: string;
-  follower_last_name: string;
-  follower_email: string;
-  wishlist_name: string;
-  wishlist_notes: string;
-  wishlist_option: string;
-  wishlist_quantity: number;
-  wishlist_created_date: string;
-  product_name: string;
-  product_stars: number;
-  product_ratings: number;
-  product_quantity: number;
-  product_price: number;
-  shipping_price: number;
-  product_bought: number;
-  product_category: string;
-  product_url: string;
-  wishlist_owner_first_name: string;
-  wishlist_owner_last_name: string;
-  wishlist_owner_email: string;
+  wishlist_id: string;
+  follower_user_id: string;
 }
 
 const Wishlist = () => {
