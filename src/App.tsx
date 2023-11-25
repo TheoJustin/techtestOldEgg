@@ -10,6 +10,7 @@ import ProductDetail from './pages/product/ProductDetail';
 import UserDetails from './pages/user/UserDetails';
 import Wishlist from './pages/wishlist/Wishlist';
 import WishlistDetail from './components/wishlistcomp/WishlistDetail';
+import Cart from './pages/cart/Cart';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='/user' element={<UserDetails/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
           <Route path='/wishlist-detail' element={<WishlistDetail/>}/>
+          <Route path='/cart' element={<Cart/>}/>
         </Routes>
       </Router>
     </div>

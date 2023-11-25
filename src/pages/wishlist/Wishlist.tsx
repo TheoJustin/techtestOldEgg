@@ -54,16 +54,58 @@ export interface FollowerData {
   follower_user_id: string;
 }
 
+interface FormData {
+  product_id: string; // or number, depending on your use case
+  name: string;
+  notes: string;
+  option: string;
+  quantity: string | number; // or number, depending on your use case
+  product_ids: number[];
+}
+
 const Wishlist = () => {
   const location = useLocation();
   const { userData } = location.state || {};
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [publicWishlist, setPublicWishlist] = useState<WishlistItem[]>([]);
   const [followerData, setfollowerData] = useState<FollowerData[]>([]);
-  const [sortBy, setSortBy] = useState("dateDesc"); // For sorting
-  const [filterRating, setFilterRating] = useState(0); // For rating filter
-  const [filterPrice, setFilterPrice] = useState<string | number[]>("all"); // For price filter
+  const [sortBy, setSortBy] = useState("dateDesc");
+  const [filterRating, setFilterRating] = useState(0);
+  const [filterPrice, setFilterPrice] = useState<string | number[]>("all");
   const [manageWishlist, setManageWishlist] = useState(0);
+  const [createListPopup, setCreateListPopup] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    product_id: "",
+    name: "",
+    notes: "",
+    option: "",
+    quantity: "",
+    product_ids: [],
+  });
+
+  const handleProductIdsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const productIds = e.target.value
+      .split(",")
+      .map((id) => parseInt(id.trim(), 10))
+      .filter((id) => !isNaN(id)); // Filter out any non-numeric values
+
+    setFormData({ ...formData, product_ids: productIds });
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+  
+    if (name === 'quantity') {
+      const quantityValue = parseInt(value, 10) || 0;
+      console.log('Quantity value:', quantityValue);
+      setFormData({ ...formData, [name]: quantityValue });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+  
 
   useEffect(() => {
     axios
@@ -119,52 +161,71 @@ const Wishlist = () => {
     setFilterPrice(value === "all" ? "all" : value.split("-").map(Number));
   };
 
+  const openCreateListPopup = () => {
+    setCreateListPopup(true);
+  };
+
+  const closeCreateListPopup = () => {
+    setCreateListPopup(false);
+  };
+
   const applyFiltersAndSorting = () => {
-  return wishlist
-    .filter((item) => {
-      // Filter by rating
-      if (filterRating > 0) {
-        return item.products.some((product) => product.stars >= filterRating);
-      }
-      return true;
-    })
-    .filter((item) => {
-      // Filter by price
-      if (filterPrice !== "all" && Array.isArray(filterPrice) && filterPrice.length === 2) {
-        const [minPrice, maxPrice] = filterPrice;
-        return item.products.some((product) => product.product_price >= minPrice && product.product_price <= maxPrice);
-      }
-      return true;
-    })
-    .sort((a, b) => {
-      // Sorting by date
-      const dateA = new Date(a.created_date).getTime();
-      const dateB = new Date(b.created_date).getTime();
-      return sortBy === "dateDesc" ? dateB - dateA : dateA - dateB;
-    });
-};
+    return wishlist
+      .filter((item) => {
+        // Filter by rating
+        if (filterRating > 0) {
+          return item.products.some((product) => product.stars >= filterRating);
+        }
+        return true;
+      })
+      .filter((item) => {
+        // Filter by price
+        if (
+          filterPrice !== "all" &&
+          Array.isArray(filterPrice) &&
+          filterPrice.length === 2
+        ) {
+          const [minPrice, maxPrice] = filterPrice;
+          return item.products.some(
+            (product) =>
+              product.product_price >= minPrice &&
+              product.product_price <= maxPrice
+          );
+        }
+        return true;
+      })
+      .sort((a, b) => {
+        // Sorting by date
+        const dateA = new Date(a.created_date).getTime();
+        const dateB = new Date(b.created_date).getTime();
+        return sortBy === "dateDesc" ? dateB - dateA : dateA - dateB;
+      });
+  };
 
   const filteredAndSortedWishlist = applyFiltersAndSorting();
 
   const applyFiltersAndSortingForPublic = () => {
     return publicWishlist
-    .filter((item) => {
-      // Filter by rating
-      if (filterRating > 0) {
-        return item.products.some((product) => product.stars >= filterRating);
-      }
-      return true;
-    })
-    .filter((item) => {
-      // Filter by price
-      if (Array.isArray(filterPrice)) {
-        const [minPrice, maxPrice] = filterPrice;
-        return item.products.some((product) => {
-          return product.product_price >= minPrice && product.product_price <= maxPrice;
-        });
-      }
-      return true;
-    })
+      .filter((item) => {
+        // Filter by rating
+        if (filterRating > 0) {
+          return item.products.some((product) => product.stars >= filterRating);
+        }
+        return true;
+      })
+      .filter((item) => {
+        // Filter by price
+        if (Array.isArray(filterPrice)) {
+          const [minPrice, maxPrice] = filterPrice;
+          return item.products.some((product) => {
+            return (
+              product.product_price >= minPrice &&
+              product.product_price <= maxPrice
+            );
+          });
+        }
+        return true;
+      })
       .sort((a, b) => {
         if (sortBy === "dateDesc") {
           // Descending order
@@ -182,6 +243,26 @@ const Wishlist = () => {
 
         return 0;
       });
+  };
+
+  const handleCreateListSubmitForm = () => {
+    const completeFormData = {
+      user_id: userData.id,
+      ...formData,
+    };
+
+    console.log(completeFormData);
+
+    axios
+      .post("http://localhost:8080/wishlist/insert", completeFormData)
+      .then((response) => {
+        console.log("Response:", response.data);
+        // Additional logic on success
+      })
+      .catch((error) => {
+        console.error("Error creating wishlist item:", error);
+      });
+    closeCreateListPopup();
   };
 
   const filteredAndSortedPublicWishlist = applyFiltersAndSortingForPublic();
@@ -226,6 +307,81 @@ const Wishlist = () => {
 
   return (
     <div>
+      {createListPopup && (
+        <div className="wishlist-manage-background">
+          <div className="wishlist-manage-container">
+            <div className="wishlist-manage-text">Create New List</div>
+            <div className="wishlist-manage-table">
+              <div className="wishlist-manage-table-row">
+                INPUT NEW WISHLIST
+              </div>
+              <div className="wishlist-manage-table-row">
+                <input
+                  type="text"
+                  name="product_ids"
+                  placeholder="Product IDs (comma-separated)"
+                  className="wishlist-manage-input"
+                  onChange={handleProductIdsChange}
+                />
+              </div>
+              <div className="wishlist-manage-table-row">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="List Name"
+                  className="wishlist-manage-input"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="wishlist-manage-table-row">
+                <textarea
+                  name="notes"
+                  placeholder="Notes"
+                  className="wishlist-manage-textarea"
+                  value={formData.notes}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="wishlist-manage-table-row">
+                <select
+                  name="option"
+                  className="wishlist-manage-dropdown"
+                  value={formData.option}
+                  onChange={handleChange}
+                >
+                  <option value="private">Private</option>
+                  <option value="public">Public</option>
+                </select>
+              </div>
+              <div className="wishlist-manage-table-row">
+                <input
+                  type="number"
+                  name="quantity"
+                  placeholder="Quantity"
+                  className="wishlist-manage-input"
+                  value={formData.quantity}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="wishlist-manage-btn-container">
+              <div
+                className="wishlist-manage-btn"
+                onClick={closeCreateListPopup}
+              >
+                CANCEL
+              </div>
+              <div
+                className="wishlist-manage-btn"
+                onClick={handleCreateListSubmitForm}
+              >
+                CREATE
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {manageWishlist === 1 && (
         <div className="wishlist-manage-background">
           <div className="wishlist-manage-container">
@@ -237,42 +393,37 @@ const Wishlist = () => {
                 </div>
                 <div className="wishlist-manage-table-privacy">Privacy</div>
               </div>
-              {wishlist.map(
-                (
-                  item,
-                  index
-                ) => (
-                  <div
-                    className="wishlist-manage-table-row"
-                    key={item.wishlist_id}
-                  >
-                    <div className="wishlist-manage-table-text">
-                      <input
-                        type="text"
-                        value={item.name}
-                        className="wishlist-manage-table-input"
-                        onChange={(e) =>
-                          handleWishlistChange(index, "name", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="wishlist-manage-table-privacy">
-                      <select
-                        name=""
-                        id=""
-                        className="wishlist-manage-table-dropdown"
-                        value={item.option}
-                        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                          handleWishlistChange(index, "option", e.target.value)
-                        }
-                      >
-                        <option value="private">private</option>
-                        <option value="public">public</option>
-                      </select>
-                    </div>
+              {wishlist.map((item, index) => (
+                <div
+                  className="wishlist-manage-table-row"
+                  key={item.wishlist_id}
+                >
+                  <div className="wishlist-manage-table-text">
+                    <input
+                      type="text"
+                      value={item.name}
+                      className="wishlist-manage-table-input"
+                      onChange={(e) =>
+                        handleWishlistChange(index, "name", e.target.value)
+                      }
+                    />
                   </div>
-                )
-              )}
+                  <div className="wishlist-manage-table-privacy">
+                    <select
+                      name=""
+                      id=""
+                      className="wishlist-manage-table-dropdown"
+                      value={item.option}
+                      onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                        handleWishlistChange(index, "option", e.target.value)
+                      }
+                    >
+                      <option value="private">private</option>
+                      <option value="public">public</option>
+                    </select>
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="wishlist-manage-btn-container">
               <div className="wishlist-manage-btn" onClick={exitManageWishlist}>
@@ -345,7 +496,12 @@ const Wishlist = () => {
 
           {activeView === "myLists" && (
             <div className="wishlist-btn-container">
-              <div className="wishlist-btn-update">CREATE A LIST</div>
+              <div
+                className="wishlist-btn-update"
+                onClick={openCreateListPopup}
+              >
+                CREATE A LIST
+              </div>
               <div
                 className="wishlist-btn-update"
                 onClick={handleManageWishlist}

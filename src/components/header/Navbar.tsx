@@ -55,6 +55,21 @@ function Navbar(props: NavbarProps) {
     }
   };
 
+
+  const handleCart = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/user/${props.firstName}`
+      );
+
+      // Navigate to Shop component with the fetched data
+      navigate("/cart", { state: { userData: response.data } });
+    } catch (error) {
+      console.error("Error fetching shop data:", error);
+      // Handle error appropriately
+    }
+  };
+
   const [current, setCurrent] = React.useState(0);
   const changeLang = () => {
     setCurrent((current + 1) % 2);
@@ -115,7 +130,7 @@ function Navbar(props: NavbarProps) {
           <div className="doubleTop">{returns[current]}</div>
           <div className="doubleBot">{order[current]}</div>
         </div>
-        <img className="image" src={cart} alt="" />
+        <img className="image" src={cart} alt="" onClick={handleCart}/>
       </div>
 
       <div className="botnav">

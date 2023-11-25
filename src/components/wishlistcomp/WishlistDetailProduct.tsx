@@ -5,6 +5,8 @@ import {
   User,
 } from "../../pages/wishlist/Wishlist";
 import "./WishlistDetailProduct.scss";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 interface Product {
   id: number;
@@ -26,6 +28,31 @@ interface WishlistItemProps {
 }
 
 const WishlistDetailProduct = ({ item }: WishlistItemProps) => {
+  const location = useLocation();
+  const state = location.state as { wishlist: WishlistItem; userData: User };
+  const { wishlist, userData } = state;
+
+
+  const handleCreateCart = () => {
+    const completeFormData = {
+      user_id: userData.id,
+      product_id: item.id,
+      cart_quantity: 1,
+    };
+
+    console.log(completeFormData);
+
+    axios
+      .post("http://localhost:8080/cart/insert", completeFormData)
+      .then((response) => {
+        console.log("Response:", response.data);
+        // Additional logic on success
+      })
+      .catch((error) => {
+        console.error("Error creating wishlist item:", error);
+      });
+  };
+
   return (
     <div className="wishlist-detail-container-item-box">
       <img
@@ -46,8 +73,10 @@ const WishlistDetailProduct = ({ item }: WishlistItemProps) => {
           ${item.shipping_price} Shipping
         </div>
         <div className="wishlist-detail-container-item-cart">
-          <div className="wishlist-detail-container-item-quantity">Qty : {item.quantity}</div>
-          <div className="wishlist-detail-container-item-btn">ADD TO CART</div>
+          <div className="wishlist-detail-container-item-quantity">
+            Qty : {item.quantity}
+          </div>
+          <div className="wishlist-detail-container-item-btn" onClick={handleCreateCart}>ADD TO CART</div>
         </div>
       </div>
     </div>

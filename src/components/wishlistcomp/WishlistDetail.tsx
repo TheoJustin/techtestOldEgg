@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./WishlistDetail.scss";
 import WishlistDetailProduct from "./WishlistDetailProduct";
 import { WishlistItem, FollowerData, User } from "../../pages/wishlist/Wishlist";
-import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../header/Navbar";
 import Footer from "../footer/Footer";
 
@@ -11,6 +11,54 @@ const WishlistDetail = () => {
   const location = useLocation();
   const state = location.state as { wishlist: WishlistItem; userData: User };
   const { wishlist, userData } = state;
+
+  const handleCreateListSubmitForm = () => {
+    const productIds = wishlist.products.map(product => product.id);
+
+
+    const completeFormData = {
+      user_id: userData.id,
+      name: wishlist.name,
+      notes: wishlist.notes,
+      option: wishlist.option,
+      quantity: wishlist.quantity,
+      product_ids: productIds
+    };
+
+    console.log(completeFormData);
+
+    axios
+      .post("http://localhost:8080/wishlist/insert", completeFormData)
+      .then((response) => {
+        console.log("Response:", response.data);
+        // Additional logic on success
+      })
+      .catch((error) => {
+        console.error("Error creating wishlist item:", error);
+      });
+  };
+
+
+  const handleCreateListSubmitFollow = () => {
+    const completeFormData = {
+      wishlist_id: wishlist.wishlist_id,
+      follower_user_id: userData.id,
+    };
+
+    console.log(completeFormData);
+
+    axios
+      .post("http://localhost:8080/wishlist-follower/insert", completeFormData)
+      .then((response) => {
+        console.log("Response:", response.data);
+        // Additional logic on success
+      })
+      .catch((error) => {
+        console.error("Error creating wishlist item:", error);
+      });
+  };
+
+  
 
   return (
     <div>
@@ -22,8 +70,8 @@ const WishlistDetail = () => {
             by {wishlist.user.first_name}
           </div>
           <div className="wishlist-detail-container-btn-container">
-            <div className="wishlist-detail-container-btn">FOLLOW</div>
-            <div className="wishlist-detail-container-btn">DUPLICATE</div>
+            <div className="wishlist-detail-container-btn" onClick={handleCreateListSubmitFollow}>FOLLOW</div>
+            <div className="wishlist-detail-container-btn" onClick={handleCreateListSubmitForm}>DUPLICATE</div>
           </div>
         </div>
         <div className="wishlist-detail-container-details">

@@ -10,8 +10,6 @@ import tbanner from "../../assets/banner/banner_3.jpg";
 import arrow from "./../../assets/icons/greater-than.png";
 import computer from "./../../assets/icons/computer.png";
 
-// import testbanner from 'https://i.ibb.co/71wMjNk/banner1.jpg';
-
 import { useLocation } from "react-router-dom";
 import "./Home.scss";
 import Newsletter from "../../components/homecomp/NewsLetter";
