@@ -39,8 +39,9 @@ const PcStart = () => {
     axios
       .post("http://localhost:8080/pc/insert", completeFormData)
       .then((response) => {
+        const pcid = response.data.pcid;
         console.log("Response:", response.data);
-        navigate("/pc/home", { state: { data: completeFormData } });
+        navigate("/pc/home", { state: { data: completeFormData , pcid: pcid, userData: userData} });
       })
       .catch((error) => {
         console.error("Error creating pc item:", error);
