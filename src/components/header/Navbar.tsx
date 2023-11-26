@@ -55,6 +55,20 @@ function Navbar(props: NavbarProps) {
     }
   };
 
+  const handleBuildPc = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/user/${props.firstName}`
+      );
+
+      // Navigate to Shop component with the fetched data
+      navigate("/pc", { state: { userData: response.data } });
+    } catch (error) {
+      console.error("Error fetching shop data:", error);
+      // Handle error appropriately
+    }
+  };
+
 
   const handleCart = async () => {
     try {
@@ -139,7 +153,7 @@ function Navbar(props: NavbarProps) {
         <div className="navButton">RTX 4070 TI Series</div>
         <div className="navButton">{intel[current]}</div>
         <div className="navButton">RTX 4090 TI Series</div>
-        <div className="navButton">{pc[current]}</div>
+        <div className="navButton" onClick={handleBuildPc}>{pc[current]}</div>
 
         <div className="navbar-right">
           <div className="order">{volume[current]}</div>

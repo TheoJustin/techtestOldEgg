@@ -11,6 +11,8 @@ import UserDetails from './pages/user/UserDetails';
 import Wishlist from './pages/wishlist/Wishlist';
 import WishlistDetail from './components/wishlistcomp/WishlistDetail';
 import Cart from './pages/cart/Cart';
+import PcStart from './pages/pcstart/PcStart';
+import PcHome from './pages/pchome/PcHome';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route path='/wishlist' element={<Wishlist/>}/>
           <Route path='/wishlist-detail' element={<WishlistDetail/>}/>
           <Route path='/cart' element={<Cart/>}/>
+          <Route path='/pc' element={<PcStart/>}/>
+          <Route path='/pc/home' element={<PcHome/>}/>
         </Routes>
       </Router>
     </div>
