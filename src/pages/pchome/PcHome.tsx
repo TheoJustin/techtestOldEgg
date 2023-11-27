@@ -5,12 +5,17 @@ import { useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../components/header/Navbar";
 import Footer from "../../components/footer/Footer";
+import CpuComp from "../pcbuilder/CpuComp";
+import MotherboardComp from "../pcbuilder/MotherboardComp";
+import VgaComp from "../pcbuilder/VgaComp";
+import CaseComp from "../pcbuilder/CaseComp";
+import PowersupplyComp from "../pcbuilder/PowersupplyComp";
 
-interface Videographics {
+export interface Videographics {
   vg_id: number;
 
   productid: number;
-  name: number;
+  name: string;
   stars: number;
   ratings: number;
   quantity: number;
@@ -28,11 +33,11 @@ interface Videographics {
   wattage: number;
 }
 
-interface Motherboard {
+export interface Motherboard {
   motherboard_id: number;
 
   productid: number;
-  name: number;
+  name: string;
   stars: number;
   ratings: number;
   quantity: number;
@@ -50,11 +55,11 @@ interface Motherboard {
   wattage: number;
 }
 
-interface Cpu {
+export interface Cpu {
   cpu_id: number;
 
   productid: number;
-  name: number;
+  name: string;
   stars: number;
   ratings: number;
   quantity: number;
@@ -72,11 +77,11 @@ interface Cpu {
   wattage: number;
 }
 
-interface Case {
+export interface Case {
   caseid: number;
 
   productid: number;
-  name: number;
+  name: string;
   stars: number;
   ratings: number;
   quantity: number;
@@ -94,11 +99,11 @@ interface Case {
   wattage: number;
 }
 
-interface Powersupply {
+export interface Powersupply {
   pwrid: number;
 
   productid: number;
-  name: number;
+  name: string;
   stars: number;
   ratings: number;
   quantity: number;
@@ -123,6 +128,14 @@ const PcHome = () => {
   const [cpu, setCpu] = useState<Cpu[]>([]);
   const [cases, setCase] = useState<Case[]>([]);
   const [powersupply, setPowersupply] = useState<Powersupply[]>([]);
+
+  const [activeCategory, setActiveCategory] = useState("");
+
+  const handleCpuClick = () => setActiveCategory("cpu");
+  const handleMotherboardClick = () => setActiveCategory("motherboard");
+  const handleVgaClick = () => setActiveCategory("videographics");
+  const handleCaseClick = () => setActiveCategory("case");
+  const handlePowersupplyClick = () => setActiveCategory("powersupply");
 
   useEffect(() => {
     axios
@@ -179,44 +192,147 @@ const PcHome = () => {
       });
   }, []);
 
-
   return (
     <div>
       <Navbar firstName={userData.first_name} />
-      {vga.map((item, index) => (
-        <div key={index}>
-          VG ID: {item.vg_id} {/* Display vg_id of each item */}
-          {/* Add other properties if needed */}
+      <div className="pc-home-container">
+        <div className="pc-home-filter-container">
+          <div className="pc-home-filter-header">Newegg Pc Builder</div>
+          <div className="pc-home-filter-content">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              className="pc-home-filter-checkbox"
+            />
+            <div className="pc-home-filter-text">Filter by Ratings</div>
+          </div>
+
+          <div className="pc-home-filter-content">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              className="pc-home-filter-checkbox"
+            />
+            <div className="pc-home-filter-text">Filter by Price</div>
+          </div>
         </div>
-      ))}
-      {motherboard.map((item, index) => (
-        <div key={index}>
-          Motherboard ID: {item.motherboard_id}{" "}
-          {/* Display vg_id of each item */}
-          {/* Add other properties if needed */}
+        <div className="pc-home-spacer"></div>
+        {/* ini buat cpu */}
+        {activeCategory === "cpu" && (
+          <div className="pc-home-content-container">
+            <div className="pc-home-item-container-header">
+              <div className="pc-home-item-product-bold">Product</div>
+              <div className="pc-home-item-cores-bold"># of cores</div>
+              <div className="pc-home-item-clock-bold">Core clock</div>
+              <div className="pc-home-item-memory-bold">Memory</div>
+              <div className="pc-home-item-tdp-bold">TDP</div>
+              <div className="pc-home-item-ratings-bold">Ratings</div>
+              <div className="pc-home-item-price-bold">Price</div>
+            </div>
+            {cpu.map((item, index) => (
+              <CpuComp key={index} Cpu={item} />
+            ))}
+          </div>
+        )}
+
+        {/* ini buat Motherboard */}
+        {activeCategory === "motherboard" && (
+          <div className="pc-home-content-container">
+            <div className="pc-home-item-container-header">
+              <div className="pc-home-item-product-bold">Product</div>
+              <div className="pc-home-item-cores-bold">Socket</div>
+              <div className="pc-home-item-clock-bold">FormFactor</div>
+              <div className="pc-home-item-memory-bold">MaxMemory</div>
+              <div className="pc-home-item-tdp-bold">MemorySlot</div>
+              <div className="pc-home-item-ratings-bold">Ratings</div>
+              <div className="pc-home-item-price-bold">Price</div>
+            </div>
+            {motherboard.map((item, index) => (
+              <MotherboardComp key={index} Motherboard={item} />
+            ))}
+          </div>
+        )}
+
+        {/* ini buat Videographics */}
+        {activeCategory === "videographics" && (
+          <div className="pc-home-content-container">
+            <div className="pc-home-item-container-header">
+              <div className="pc-home-item-product-bold">Product</div>
+              <div className="pc-home-item-cores-bold">GPU</div>
+              <div className="pc-home-item-clock-bold">Memory</div>
+              <div className="pc-home-item-memory-bold">PSU</div>
+              <div className="pc-home-item-tdp-bold">Length</div>
+              <div className="pc-home-item-ratings-bold">Ratings</div>
+              <div className="pc-home-item-price-bold">Price</div>
+            </div>
+            {vga.map((item, index) => (
+              <VgaComp key={index} Videographics={item} />
+            ))}
+          </div>
+        )}
+
+        {/* ini buat Cases */}
+        {activeCategory === "case" && (
+          <div className="pc-home-content-container">
+            <div className="pc-home-item-container-header">
+              <div className="pc-home-item-product-bold">Product</div>
+              <div className="pc-home-item-cores-bold">Type</div>
+              <div className="pc-home-item-clock-bold">Color</div>
+              <div className="pc-home-item-memory-bold">LED</div>
+              <div className="pc-home-item-tdp-bold">Material</div>
+              <div className="pc-home-item-ratings-bold">Ratings</div>
+              <div className="pc-home-item-price-bold">Price</div>
+            </div>
+            {cases.map((item, index) => (
+              <CaseComp key={index} Case={item} />
+            ))}
+          </div>
+        )}
+
+        {/* ini buat Powersupply */}
+        {activeCategory === "powersupply" && (
+          <div className="pc-home-content-container">
+            <div className="pc-home-item-container-header">
+              <div className="pc-home-item-product-bold">Product</div>
+              <div className="pc-home-item-cores-bold">Type</div>
+              <div className="pc-home-item-clock-bold">Energy</div>
+              <div className="pc-home-item-memory-bold">Wattage</div>
+              <div className="pc-home-item-tdp-bold">Modular</div>
+              <div className="pc-home-item-ratings-bold">Ratings</div>
+              <div className="pc-home-item-price-bold">Price</div>
+            </div>
+            {powersupply.map((item, index) => (
+              <PowersupplyComp key={index} Powersupply={item} />
+            ))}
+          </div>
+        )}
+
+        <div className="pc-home-navbar-container">
+          <div className="pc-home-navbar-icons" onClick={handleCpuClick}>
+            CPU
+          </div>
+          <div
+            className="pc-home-navbar-icons"
+            onClick={handleMotherboardClick}
+          >
+            Motherboard
+          </div>
+          <div className="pc-home-navbar-icons" onClick={handleVgaClick}>
+            Video Graphics
+          </div>
+          <div className="pc-home-navbar-icons" onClick={handleCaseClick}>
+            Case
+          </div>
+          <div
+            className="pc-home-navbar-icons"
+            onClick={handlePowersupplyClick}
+          >
+            Power Supply
+          </div>
         </div>
-      ))}
-      {cpu.map((item, index) => (
-        <div key={index}>
-          Cpu ID: {item.cpu_id} {/* Display vg_id of each item */}
-          {/* Add other properties if needed */}
-        </div>
-      ))}
-      {cases.map((item, index) => (
-        <div key={index}>
-          Case ID: {item.caseid} {/* Display vg_id of each item */}
-          {/* Add other properties if needed */}
-        </div>
-      ))}
-      {powersupply.map((item, index) => (
-        <div key={index}>
-          Powersupply ID: {item.pwrid} {/* Display vg_id of each item */}
-          {/* Add other properties if needed */}
-        </div>
-      ))}
-      {data.user_id}
-      {data.maxpower}
-      {pcid}
+      </div>
       <Footer />
     </div>
   );

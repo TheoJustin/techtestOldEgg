@@ -1,0 +1,86 @@
+
+.pc-home-item-container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2vw;
+    align-items: center;
+
+    .pc-home-item-product{
+        display: flex;
+        flex-direction: row;
+        width: 25%;
+        align-items: center;
+        margin-right: 1vw;
+
+        .pc-home-item-img{
+            width: 20%;
+            height: min-content;
+        }
+
+        .pc-home-item-name{
+            font-size: 0.7vw;
+            font-weight: bold;
+        }
+    }
+
+    .pc-home-item-cores{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pc-home-item-clock{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pc-home-item-memory{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pc-home-item-tdp{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pc-home-item-ratings{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pc-home-item-price{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pc-home-item-btn{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-weight: bold;
+        background-color: orange;
+        height: 100%;
+    }
+}

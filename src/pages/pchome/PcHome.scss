@@ -1,0 +1,147 @@
+.pc-home-container{
+    padding: 3vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .pc-home-spacer{
+        border: 1px solid black;
+        height: 30vw;
+        margin-right: 1vw;
+    }
+
+    .pc-home-filter-container{
+        width: 15%;
+
+        .pc-home-filter-header{
+            font-weight: bold;
+            font-size: 1.2vw;
+            margin-bottom: 1vw;
+        }
+
+        .pc-home-filter-content{
+            display: flex;
+            flex-direction: row;
+            .pc-home-filter-text{
+                margin-left: 1vw;
+            }
+        }
+
+        .pc-home-content-container{
+            padding: 1vw;
+            box-sizing: border-box;
+        }
+    }
+
+    
+}
+
+.pc-home-content-container{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.pc-home-item-container-header{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2vw;
+    background-color: #f8f4f4;
+    border-radius: 10px;
+    padding: 1vw;
+    box-sizing: border-box;
+
+    .pc-home-item-product-bold{
+        display: flex;
+        flex-direction: row;
+        width: 25%;
+        align-items: center;
+        margin-right: 1vw;
+        font-weight: bold;
+        justify-content: center;
+
+        .pc-home-item-img{
+            width: 20%;
+            height: min-content;
+        }
+
+        .pc-home-item-name{
+            font-size: 0.7vw;
+            font-weight: bold;
+        }
+    }
+
+    .pc-home-item-cores-bold{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        font-weight: bold;
+        justify-content: center;
+    }
+
+    .pc-home-item-clock-bold{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        font-weight: bold;
+        justify-content: center;
+    }
+
+    .pc-home-item-memory-bold{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        font-weight: bold;
+        justify-content: center;
+    }
+
+    .pc-home-item-tdp-bold{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        font-weight: bold;
+        justify-content: center;
+    }
+
+    .pc-home-item-ratings-bold{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .pc-home-item-price-bold{
+        display: flex;
+        flex-direction: row;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+}
+
+.pc-home-navbar-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 1vw;
+    width: 10%;
+
+    .pc-home-navbar-icons{
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 1vw;
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
