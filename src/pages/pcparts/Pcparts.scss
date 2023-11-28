@@ -1,0 +1,93 @@
+.pcparts-list-container{
+    padding: 2vw;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .pcparts-list-header{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .pcparts-list-component{
+            font-weight: bold;
+            font-size: 1.2vw;
+            width: 25%;
+        }
+
+        .pcparts-list-selected{
+            font-weight: bold;
+            font-size: 1.2vw;
+            width: 75%;
+        }
+    }
+
+    .pcparts-list-content-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .pcparts-list-icon{
+            font-size: 1.1vw;
+            color: blue;
+            width: 25%;
+        }
+
+        .pcparts-list-content{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 75%;
+            justify-content: space-between;
+
+            .pcparts-list-content-img{
+                width: 10%;
+            }
+
+            .pcparts-list-content-text{
+                width: 55%;
+                font-size: 0.8vw;
+                font-weight: bold;
+            }
+
+            .pcparts-list-content-price{
+                width: 10%;
+                font-size: 1vw;
+                font-weight: bold;
+            }
+
+            .pcparts-list-content-input{
+                width: 5%;
+            }
+
+            .pcparts-list-content-remove{
+                width: 10%;
+
+                .pcparts-list-content-removeimg{
+                    width: 50%
+                }
+            }
+        }
+    }
+
+    .pcparts-list-btnright{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        .pcparts-list-addtocart{
+            width: 10%;
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: orange;
+            color: black;
+            padding: 1vw;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

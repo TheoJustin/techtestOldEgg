@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./PcHome.scss";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../components/header/Navbar";
@@ -120,6 +120,12 @@ export interface Powersupply {
   wattage: number;
 }
 
+interface FormData {
+  pc_id : number;
+  product_id : number;
+  quantity : number;
+}
+
 const PcHome = () => {
   const location = useLocation();
   const { userData, data, pcid } = location.state || {};
@@ -127,6 +133,11 @@ const PcHome = () => {
   const [motherboard, setMotherboard] = useState<Motherboard[]>([]);
   const [cpu, setCpu] = useState<Cpu[]>([]);
   const [cases, setCase] = useState<Case[]>([]);
+  const [formData, setFormData] = useState<FormData>({
+    pc_id: pcid,
+    product_id: -1,
+    quantity: 1,
+  });
   const [powersupply, setPowersupply] = useState<Powersupply[]>([]);
 
   const [activeCategory, setActiveCategory] = useState("");
@@ -136,6 +147,13 @@ const PcHome = () => {
   const handleVgaClick = () => setActiveCategory("videographics");
   const handleCaseClick = () => setActiveCategory("case");
   const handlePowersupplyClick = () => setActiveCategory("powersupply");
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => { 
+    navigate('/pc/parts', { state: { userData: userData, pcid: pcid} });
+  }
+  
 
   useEffect(() => {
     axios
@@ -330,6 +348,12 @@ const PcHome = () => {
             onClick={handlePowersupplyClick}
           >
             Power Supply
+          </div>
+          <div
+            className="pc-home-navbar-icons"
+            onClick={handleNavigate}
+          >
+            Go to list
           </div>
         </div>
       </div>

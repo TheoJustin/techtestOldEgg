@@ -13,6 +13,7 @@ import WishlistDetail from './components/wishlistcomp/WishlistDetail';
 import Cart from './pages/cart/Cart';
 import PcStart from './pages/pcstart/PcStart';
 import PcHome from './pages/pchome/PcHome';
+import Pcparts from './pages/pcparts/Pcparts';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/pc' element={<PcStart/>}/>
           <Route path='/pc/home' element={<PcHome/>}/>
+          <Route path='/pc/parts' element={<Pcparts/>}/>
         </Routes>
       </Router>
     </div>
