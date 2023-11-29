@@ -9,7 +9,6 @@ import logo from "./../../assets/logo.png";
 import search from "./../../assets/icons/search.png";
 import cart from "./../../assets/icons/shopping-cart.png";
 import user from "./../../assets/icons/user.png";
-import flag from "./../../assets/icons/singapore.png";
 import notification from "./../../assets/icons/bell.png";
 import location from "./../../assets/icons/location.png";
 import indonesia from "./../../assets/icons/indonesia.png";
@@ -17,15 +16,15 @@ import uk from "./../../assets/icons/united-kingdom.png";
 
 type NavbarProps = {
   firstName: string;
-
-  // isDarkMode: boolean;
-  // setIsDarkMode: (isDarkMode: boolean) => void;
 };
 
 function Navbar(props: NavbarProps) {
-  // const { firstName, isDarkMode, setIsDarkMode } = props;
 
   const navigate = useNavigate();
+
+  const handleHomeClick = () => {
+    navigate("/home", { state: { firstName: props.firstName } });
+  }  
 
   const handleUserClick = async () => {
     try {
@@ -33,11 +32,9 @@ function Navbar(props: NavbarProps) {
         `http://localhost:8080/api/user/${props.firstName}`
       );
 
-      // Navigate to Shop component with the fetched data
       navigate("/user", { state: { userData: response.data } });
     } catch (error) {
       console.error("Error fetching shop data:", error);
-      // Handle error appropriately
     }
   };
 
@@ -84,6 +81,20 @@ function Navbar(props: NavbarProps) {
     }
   };
 
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/product/name/nama_produk`
+      );
+
+      // Navigate to Shop component with the fetched data
+      navigate("/cart", { state: { userData: response.data } });
+    } catch (error) {
+      console.error("Error fetching shop data:", error);
+      // Handle error appropriately
+    }
+  };
+
   const [current, setCurrent] = React.useState(0);
   const changeLang = () => {
     setCurrent((current + 1) % 2);
@@ -107,7 +118,7 @@ function Navbar(props: NavbarProps) {
     <div className="navbar">
       <div className="topnav">
         <img className="image" src={hamburger} alt="" />
-        <img className="image" src={logo} alt="" />
+        <img className="image" src={logo} alt="" onClick={handleHomeClick}/>
 
         <div className="couple">
           <img className="image" src={location} alt="" />
@@ -131,7 +142,6 @@ function Navbar(props: NavbarProps) {
           <img className="image" src={flag[current]} alt="" />
         </div>
 
-        {/* <Mode isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} /> */}
         <Mode />
         <div className="couple" onClick={handleUserClick}>
           <img className="image" src={user} alt="" />

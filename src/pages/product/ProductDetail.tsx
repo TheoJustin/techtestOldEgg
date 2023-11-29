@@ -2,12 +2,60 @@ import React, { useState } from "react";
 import "./ProductDetail.scss";
 import computer from "./../../assets/icons/computer.png";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 import Navbar from "../../components/header/Navbar";
 import Footer from "../../components/footer/Footer";
+
+interface User {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  mobile_phone: string;
+  password: string;
+  is_subscribed: boolean;
+}
 
 const ProductDetail = () => {
   const location = useLocation();
   const { productData, firstName } = location.state || {};
+  const [userData, setUserData] = useState<User | null>(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/user/${firstName}`)
+      .then((response) => {
+        setUserData(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the wishlist!", error);
+      });
+  }, []);
+  
+  const handleCreateCart = () => {
+    if (userData) {
+      const completeFormData = {
+        user_id: userData.id,
+        product_id: productData.id,
+        cart_quantity: 1,
+      };
+  
+      axios
+        .post("http://localhost:8080/cart/insert", completeFormData)
+        .then((response) => {
+          console.log("Product added to cart:", productData.id);
+        })
+        .catch((error) => {
+          console.error("Error adding product to cart:", productData.id, error);
+        });
+    } else {
+      console.error("User data is not available");
+    }
+  };
+  
+
+
   return (
     <div>
       <Navbar firstName={firstName} />
@@ -47,15 +95,19 @@ const ProductDetail = () => {
               max={productData.quantity}
               className="product-detail-cart-input"
             />
-            <div className="product-detail-cart-btn">ADD TO CART</div>
+            <div className="product-detail-cart-btn" onClick={handleCreateCart}>ADD TO CART</div>
           </div>
           <div className="product-detail-wishlist">
             <div className="product-detail-wishlist-checkbox"></div>
-            <div className="">[x] ADD TO WISHLIST</div>
+            <div className="product-detail-wishlist-addwishlist-container">
+              <div className="product-detail-wishlist-addwishlist">
+                ADD TO WISHLIST
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

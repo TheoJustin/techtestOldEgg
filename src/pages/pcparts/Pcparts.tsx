@@ -39,6 +39,37 @@ const Pcparts = () => {
       });
   }, []);
 
+  const handleCreateCart = () => {
+    product.forEach((item) => {
+      const completeFormData = {
+        user_id: userData.id,
+        product_id: item.productid,
+        cart_quantity: 1,
+      };
+  
+      axios
+        .post("http://localhost:8080/cart/insert", completeFormData)
+        .then((response) => {
+          console.log("Product added to cart:", item.name);
+        })
+        .catch((error) => {
+          console.error("Error adding product to cart:", item.name, error);
+        });
+    });
+  };
+
+  const handleremove = (productId : number) => {
+    axios
+    .delete(`http://localhost:8080/pcparts/remove/${pcid}/${productId}`)
+    .then((response) => {
+        console.log("Product deleted");
+    })
+    .catch((error) => {
+        console.error("Error deleting product", error);
+    });
+  }
+  
+
   return (
     <div>
       <Navbar firstName={userData.first_name} />
@@ -71,13 +102,14 @@ const Pcparts = () => {
                   src={remove}
                   alt=""
                   className="pcparts-list-content-removeimg"
+                  onClick={() => handleremove(item.productid)}
                 />
               </div>
             </div>
           </div>
         ))}
         <div className="pcparts-list-btnright">
-          <div className="pcparts-list-addtocart">Add To Cart</div>
+          <div className="pcparts-list-addtocart" onClick={handleCreateCart}>Add To Cart</div>
         </div>
       </div>
       <Footer />

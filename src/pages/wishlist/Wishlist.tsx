@@ -55,11 +55,11 @@ export interface FollowerData {
 }
 
 interface FormData {
-  product_id: string; // or number, depending on your use case
+  product_id: string;
   name: string;
   notes: string;
   option: string;
-  quantity: string | number; // or number, depending on your use case
+  quantity: string | number;
   product_ids: number[];
 }
 

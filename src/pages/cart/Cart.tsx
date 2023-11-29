@@ -3,6 +3,7 @@ import "./Cart.scss";
 import { useLocation } from "react-router-dom";
 import Navbar from "../../components/header/Navbar";
 import Footer from "../../components/footer/Footer";
+import remove from "../../assets/icons/remove.png";
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -42,6 +43,9 @@ const Cart = () => {
     shippingPrice += cart[index].shipping_price;
   }
 
+  let totalPrice = parseFloat(price.toFixed(2)) + parseFloat(shippingPrice.toFixed(2));
+
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -72,7 +76,6 @@ const Cart = () => {
         .post("http://localhost:8080/order/insert", completeFormData)
         .then((response) => {
             console.log("Response:", response.data);
-            // Additional logic on success
         })
         .catch((error) => {
             console.error("Error creating order item:", error);
@@ -90,6 +93,17 @@ const Cart = () => {
         console.error("There was an error fetching the Carts!", error);
       });
   }, []);
+
+  const handleremove = (productId : number) => {
+    axios
+    .delete(`http://localhost:8080/carts/remove/${userData.id}/${productId}`)
+    .then((response) => {
+        console.log("Cart item deleted");
+    })
+    .catch((error) => {
+        console.error("Error deleting cart item", error);
+    });
+  }
 
   return (
     <div>
@@ -112,7 +126,6 @@ const Cart = () => {
                     min={1}
                     max={item.quantity}
                     onChange={handleChange}
-                    // defaultValue={cart[index].quantity}
                   />
                   <div className="shoppingcart-product-limit">
                     Limit {item.quantity}
@@ -120,6 +133,9 @@ const Cart = () => {
                 </div>
                 <div className="shoppingcart-product-price">
                   {item.product_price}
+                </div>
+                <div className="shoppingcart-product-remove">
+                  <img src={remove} alt="" className="shoppingcart-product-remove-img" onClick={() => handleremove(item.product_id)}/>
                 </div>
               </div>
             </div>
@@ -130,19 +146,19 @@ const Cart = () => {
           <div className="shoppingcart-summary-title">Summary</div>
           <div className="shoppingcart-summary-price-container">
             <div className="shoppingcart-sumary-price-header">Item(s):</div>
-            <div className="shoppingcart-summary-price">{price}</div>
+            <div className="shoppingcart-summary-price">{price.toFixed(2)}</div>
           </div>
           <div className="shoppingcart-summary-price-container">
             <div className="shoppingcart-sumary-price-header">
               Est. Delivery:
             </div>
-            <div className="shoppingcart-summary-price">{shippingPrice}</div>
+            <div className="shoppingcart-summary-price">{shippingPrice.toFixed(2)}</div>
           </div>
           <div className="shoppingcart-summary-price-container-big">
             <div className="shoppingcart-sumary-price-header-big">
               Est. Total:
             </div>
-            <div className="shoppingcart-summary-price-big">{price + shippingPrice}</div>
+            <div className="shoppingcart-summary-price-big">{totalPrice}</div>
           </div>
           <div className="shoppingcart-secure-checkout" onClick={handleCreateListSubmitForm}>SECURE CHECKOUT</div>
         </div>

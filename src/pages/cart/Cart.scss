@@ -24,6 +24,7 @@
         box-sizing: border-box;
         background-color: white;
         align-items: center;
+        width: 100%;
         
 
         .shoppingcart-product-img{
@@ -35,11 +36,13 @@
             display: flex;
             flex-direction: row;
             align-items: flex-start;
+            width: 30%;
 
             .shoppingcart-product-title{
                 flex-grow: 1;
                 font-size: 1.2vw;
                 font-weight: bold;
+                width: 10%;
             }
             
             .shoppingcart-product-input-quantity{
@@ -48,6 +51,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 7%;
+                margin-left: 1vw;
 
                 .shoppingcart-product-input{
                     text-align: center;
@@ -55,7 +59,7 @@
                 }
 
                 .shoppingcart-product-limit{
-                    font-size: 1vw;
+                    font-size: 0.8vw;
                 }
             }
 
@@ -64,6 +68,15 @@
                 text-align: end;
                 font-size: 1.6vw;
                 font-weight: bold;
+            }
+
+            .shoppingcart-product-remove{
+                width: 5%;
+                margin-left: 1vw;
+            }
+
+            .shoppingcart-product-remove-img{
+                width: 100%;
             }
         }
     }
