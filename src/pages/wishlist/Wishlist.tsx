@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { ChangeEvent } from "react";
 import "./Wishlist.scss";
-import computer from "./../../assets/icons/computer.png";
-import WishlistItemComponent from "../../components/wishlistcomp/WishlistItem";
 import WishlistFollower from "../../components/wishlistcomp/WishlistFollower";
 import WishlistContainer from "../../components/wishlistcomp/WishlistContainer";
 import { useLocation } from "react-router-dom";
@@ -11,7 +9,6 @@ import { useEffect } from "react";
 import Navbar from "../../components/header/Navbar";
 import Footer from "../../components/footer/Footer";
 
-// for wishlist
 export interface User {
   id: number;
   first_name: string;
@@ -87,7 +84,7 @@ const Wishlist = () => {
     const productIds = e.target.value
       .split(",")
       .map((id) => parseInt(id.trim(), 10))
-      .filter((id) => !isNaN(id)); // Filter out any non-numeric values
+      .filter((id) => !isNaN(id)); 
 
     setFormData({ ...formData, product_ids: productIds });
   };
@@ -116,7 +113,7 @@ const Wishlist = () => {
       .catch((error) => {
         console.error("There was an error fetching the wishlist!", error);
       });
-  }, []);
+  }, [userData.id]);
 
   useEffect(() => {
     axios
@@ -172,14 +169,12 @@ const Wishlist = () => {
   const applyFiltersAndSorting = () => {
     return wishlist
       .filter((item) => {
-        // Filter by rating
         if (filterRating > 0) {
           return item.products.some((product) => product.stars >= filterRating);
         }
         return true;
       })
       .filter((item) => {
-        // Filter by price
         if (
           filterPrice !== "all" &&
           Array.isArray(filterPrice) &&
@@ -195,7 +190,6 @@ const Wishlist = () => {
         return true;
       })
       .sort((a, b) => {
-        // Sorting by date
         const dateA = new Date(a.created_date).getTime();
         const dateB = new Date(b.created_date).getTime();
         return sortBy === "dateDesc" ? dateB - dateA : dateA - dateB;
@@ -207,14 +201,12 @@ const Wishlist = () => {
   const applyFiltersAndSortingForPublic = () => {
     return publicWishlist
       .filter((item) => {
-        // Filter by rating
         if (filterRating > 0) {
           return item.products.some((product) => product.stars >= filterRating);
         }
         return true;
       })
       .filter((item) => {
-        // Filter by price
         if (Array.isArray(filterPrice)) {
           const [minPrice, maxPrice] = filterPrice;
           return item.products.some((product) => {
@@ -228,13 +220,11 @@ const Wishlist = () => {
       })
       .sort((a, b) => {
         if (sortBy === "dateDesc") {
-          // Descending order
           return (
             new Date(b.created_date).getTime() -
             new Date(a.created_date).getTime()
           );
         } else if (sortBy === "dateAsc") {
-          // Ascending order
           return (
             new Date(a.created_date).getTime() -
             new Date(b.created_date).getTime()
@@ -257,7 +247,6 @@ const Wishlist = () => {
       .post("http://localhost:8080/wishlist/insert", completeFormData)
       .then((response) => {
         console.log("Response:", response.data);
-        // Additional logic on success
       })
       .catch((error) => {
         console.error("Error creating wishlist item:", error);
@@ -271,7 +260,6 @@ const Wishlist = () => {
 
   const [activeView, setActiveView] = useState("myLists"); // New state to track the active view
 
-  // Function to change the active view
   const handleViewChange = (view: ActiveView) => {
     setActiveView(view);
   };
@@ -281,7 +269,6 @@ const Wishlist = () => {
       .put("http://localhost:8080/wishlist/update", updatedWishlist)
       .then((response) => {
         console.log("Wishlist updated:", response.data);
-        // Optionally refresh the wishlist data from the server here
       })
       .catch((error) => {
         console.error("Error updating wishlist:", error);

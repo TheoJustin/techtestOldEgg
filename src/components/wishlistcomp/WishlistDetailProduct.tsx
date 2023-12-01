@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   WishlistItem,
-  FollowerData,
   User,
 } from "../../pages/wishlist/Wishlist";
 import "./WishlistDetailProduct.scss";
@@ -22,7 +21,6 @@ interface Product {
   shop_id: number;
 }
 
-// // Define WishlistItemProps
 interface WishlistItemProps {
   item: Product;
 }
@@ -30,7 +28,7 @@ interface WishlistItemProps {
 const WishlistDetailProduct = ({ item }: WishlistItemProps) => {
   const location = useLocation();
   const state = location.state as { wishlist: WishlistItem; userData: User };
-  const { wishlist, userData } = state;
+  const { userData } = state;
 
 
   const handleCreateCart = () => {
@@ -46,7 +44,6 @@ const WishlistDetailProduct = ({ item }: WishlistItemProps) => {
       .post("http://localhost:8080/cart/insert", completeFormData)
       .then((response) => {
         console.log("Response:", response.data);
-        // Additional logic on success
       })
       .catch((error) => {
         console.error("Error creating wishlist item:", error);
@@ -58,6 +55,7 @@ const WishlistDetailProduct = ({ item }: WishlistItemProps) => {
       <img
         src={item.urlproduct}
         className="wishlist-detail-container-item-img"
+        alt=""
       />
       <div className="wishlist-detail-container-item-desc">
         <div className="wishlist-detail-container-item-rating">

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./AccountSettings.scss";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import Footer from "../footer/Footer";
 
 const AccountSettings = () => {
   const location = useLocation();
@@ -24,12 +23,10 @@ const AccountSettings = () => {
         })
         .then((response) => {
           setSuccessMessage("Password updated successfully!");
-          // Reset the password fields
           setOldPassword("");
           setNewPassword("");
         })
         .catch((error) => {
-          // Handle error here
           setSuccessMessage("Failed to update password.");
         });
     } else {

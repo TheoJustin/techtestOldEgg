@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Cart.scss";
 import { useLocation } from "react-router-dom";
 import Navbar from "../../components/header/Navbar";
@@ -23,17 +23,11 @@ interface Cart {
   shop_id: number;
 }
 
-interface FormData {
-    invoice: string;
-    productid: string;
-    quantity: number;
-}
 
 const Cart = () => {
   const location = useLocation();
   const { userData } = location.state || {};
   const [cart, setCarts] = React.useState<Cart[]>([]);
-  const [formData, setFormData] = useState<FormData[]>([]);
 
   let price = 0;
   let shippingPrice = 0;
@@ -92,7 +86,7 @@ const Cart = () => {
       .catch((error) => {
         console.error("There was an error fetching the Carts!", error);
       });
-  }, []);
+  }, [userData.id]);
 
   const handleremove = (productId : number) => {
     axios
@@ -115,7 +109,7 @@ const Cart = () => {
           </div>
           {cart.map((item, index) => (
             <div className="shoppingcart-product-container">
-              <img src={item.urlproduct} className="shoppingcart-product-img" />
+              <img src={item.urlproduct} className="shoppingcart-product-img" alt=""/>
               <div className="shoppingcart-product-detail-container">
                 <div className="shoppingcart-product-title">{item.name}</div>
                 <div className="shoppingcart-product-input-quantity">

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ShopReview.scss";
-import computer from "./../../assets/icons/computer.png";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
@@ -19,7 +18,7 @@ interface Review {
 
 const ShopReview = () => {
   const location = useLocation();
-  const { shopData, firstName } = location.state || {};
+  const { shopData } = location.state || {};
   const [reviews, setReviews] = React.useState<Review[]>([]);
   const [filteredReviews, setFilteredReviews] = useState<Review[]>([]);
   const [filter, setFilter] = useState("Overall");
@@ -99,7 +98,6 @@ const ShopReview = () => {
       .length;
   };
 
-  // Calculate total number of reviews
   const totalReviews = reviews.length;
 
   return (
@@ -130,7 +128,6 @@ const ShopReview = () => {
           </div>
         </div>
         <div className="shop-review-average-ratings">
-          {/* Render average rating bars */}
           {[...Array(5)].map((_, index) => {
             const ratingValue = 5 - index;
             const ratingCount = countRatings(ratingValue);

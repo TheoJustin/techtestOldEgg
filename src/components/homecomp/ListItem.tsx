@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ListItem.scss';
 import arrow from './../../assets/icons/greater-than.png';
 

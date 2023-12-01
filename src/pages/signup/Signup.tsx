@@ -16,7 +16,7 @@ function Signup() {
     isSubscribed: false,
   });
 
-  const navigate = useNavigate(); // Moved here
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -31,11 +31,9 @@ function Signup() {
     try {
       const response = await axios.post("http://localhost:8080/signup", formData);
       console.log(response.data);
-      // Navigate to /home with email and first_name
       navigate('/home', { state: { email: formData.email, firstName: formData.first_name } });
     } catch (error) {
       console.error("Error during sign up:", error);
-      // Handle error
     }
   };
   

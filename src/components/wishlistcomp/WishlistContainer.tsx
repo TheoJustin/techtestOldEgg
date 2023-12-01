@@ -1,6 +1,5 @@
-// In WishlistContainer.tsx
 import React from "react";
-import { WishlistItem, FollowerData, Product, User } from "../../pages/wishlist/Wishlist";
+import { WishlistItem } from "../../pages/wishlist/Wishlist";
 import "./WishlistContainer.scss";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -22,7 +21,6 @@ const WishlistContainer = ({ wishlist }: WishlistContainerProps) => {
       navigate("/wishlist-detail", { state: { wishlist: wishlist, userData: userData } });
     } catch (error) {
       console.error("Error fetching shop data:", error);
-      // Handle error appropriately
     }
   };
 

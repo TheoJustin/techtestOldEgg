@@ -39,10 +39,8 @@ const Admin = () => {
       });
   
       console.log(response.data);
-      // Update local state or refetch data to reflect changes in UI
     } catch (error) {
       console.error("Error banning user:", error);
-      // Handle error (e.g., show error message to user)
     }
   };
   
@@ -54,10 +52,8 @@ const Admin = () => {
       });
   
       console.log(response.data);
-      // Update local state or refetch data to reflect changes in UI
     } catch (error) {
       console.error("Error unbanning user:", error);
-      // Handle error (e.g., show error message to user)
     }
   };
   

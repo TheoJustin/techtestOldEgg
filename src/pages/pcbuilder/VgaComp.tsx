@@ -3,12 +3,7 @@ import "./VgaComp.scss";
 import { useLocation } from "react-router-dom";
 import {
   Videographics,
-  Cpu,
-  Motherboard,
-  Powersupply,
-  Case,
 } from "../pchome/PcHome";
-import PcHome from "../pchome/PcHome";
 import axios from "axios";
 
 interface VideographicsCompProps {
@@ -23,7 +18,7 @@ interface FormData {
 
 const VgaComp = ({ Videographics }: VideographicsCompProps) => {
   const location = useLocation();
-  const { userData, data, pcid } = location.state || {};
+  const { pcid } = location.state || {};
 
   const [formData, setFormData] = useState<FormData>({
     pc_id: pcid || -1,

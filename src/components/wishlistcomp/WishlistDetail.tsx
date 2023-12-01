@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./WishlistDetail.scss";
 import WishlistDetailProduct from "./WishlistDetailProduct";
-import { WishlistItem, FollowerData, User } from "../../pages/wishlist/Wishlist";
+import { WishlistItem, User } from "../../pages/wishlist/Wishlist";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../header/Navbar";
@@ -31,7 +31,6 @@ const WishlistDetail = () => {
       .post("http://localhost:8080/wishlist/insert", completeFormData)
       .then((response) => {
         console.log("Response:", response.data);
-        // Additional logic on success
       })
       .catch((error) => {
         console.error("Error creating wishlist item:", error);
@@ -51,7 +50,6 @@ const WishlistDetail = () => {
       .post("http://localhost:8080/wishlist-follower/insert", completeFormData)
       .then((response) => {
         console.log("Response:", response.data);
-        // Additional logic on success
       })
       .catch((error) => {
         console.error("Error creating wishlist item:", error);

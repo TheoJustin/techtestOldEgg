@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ShopProducts.scss";
-import computer from "./../../../assets/icons/computer.png";
 import search from "./../../../assets/icons/search.png";
 import axios from "axios";
 import { useEffect } from "react";
@@ -44,7 +43,7 @@ const ShopProducts = () => {
       .catch((error) => {
         console.error("There was an error fetching the shops!", error);
       });
-  }, []);
+  }, [shopData.id]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -71,11 +70,11 @@ const ShopProducts = () => {
     )
     .sort((a, b) => {
       if (sortBy === "ratings") {
-        return a.ratings - b.ratings; // Ascending order
+        return a.ratings - b.ratings;
       } else if (sortBy === "product_price") {
-        return a.product_price - b.product_price; // Ascending order
+        return a.product_price - b.product_price;
       } else if (sortBy === "bought") {
-        return a.bought - b.bought; // Ascending order
+        return a.bought - b.bought;
       }
       return 0;
     });

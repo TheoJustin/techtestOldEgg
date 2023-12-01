@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ShopAboutUs.scss";
-import computer from "./../../assets/icons/computer.png";
 import Newsletter from "../../homecomp/NewsLetter";
 import { useLocation } from "react-router-dom";
 
 const ShopAboutUs = () => {
 
   const location = useLocation();
-  const { shopData, firstName } = location.state || {};
+  const { shopData } = location.state || {};
 
   return (
     <div>

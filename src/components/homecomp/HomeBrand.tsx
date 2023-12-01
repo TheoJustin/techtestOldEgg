@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./HomeBrand.scss";
 import computer from "./../../assets/icons/computer.png";
 

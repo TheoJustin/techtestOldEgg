@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./NewsLetter.scss";
 
 const Newsletter = () => {
@@ -19,7 +19,7 @@ const Newsletter = () => {
           />
           <div className="signuptext">SIGN UP</div>
         </div>
-        <a className="deals">View Latest Email Deals</a>
+        <p className="deals">View Latest Email Deals</p>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import "./WishlistFollower.scss";
-import { WishlistItem, FollowerData, Product, User } from "../../pages/wishlist/Wishlist";
+import {FollowerData} from "../../pages/wishlist/Wishlist";
 
 
 interface WishlistItemProps {

@@ -1,7 +1,6 @@
 import React from 'react';
 import './WishlistItem.scss';
 
-// Assuming these interfaces are in the same file. If not, import them.
 interface Product {
     id: number;
     name: string;
@@ -16,7 +15,6 @@ interface Product {
     shop_id: number;
 }
 
-// // Define WishlistItemProps
 interface WishlistItemProps {
     item: Product;
 }

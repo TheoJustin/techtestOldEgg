@@ -20,8 +20,8 @@ const OrderHistory = () => {
 
   const [orders, setOrders] = useState<Order[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
-  const [orderStatus, setOrderStatus] = useState<string>("all"); // 'open', 'cancelled', 'all'
-  const [orderDate, setOrderDate] = useState<string>("recent"); // 'recent', 'custom'
+  const [orderStatus, setOrderStatus] = useState<string>("all");
+  const [orderDate, setOrderDate] = useState<string>("recent");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const OrderHistory = () => {
       .get<Order[]>(`http://localhost:8080/orders/${userData.id}`)
       .then((response) => {
         setOrders(response.data);
-        setFilteredOrders(response.data); // Initially, all orders are shown
+        setFilteredOrders(response.data);
       })
       .catch((error) => {
         console.error("Error fetching orders", error);
@@ -39,12 +39,10 @@ const OrderHistory = () => {
   useEffect(() => {
     let filtered = orders;
 
-    // Filter by status
     if (orderStatus !== "all") {
       filtered = filtered.filter((order) => order.status === orderStatus);
     }
 
-    // Filter by date
     if (orderDate === "recent") {
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
@@ -52,8 +50,6 @@ const OrderHistory = () => {
         (order) => new Date(order.dateordered) >= oneWeekAgo
       );
     }
-
-    // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter((order) => order.invoice.includes(searchTerm));
     }
@@ -99,7 +95,6 @@ const OrderHistory = () => {
         </div>
       </div>
 
-      {/* Here you can render the filtered and searched orders */}
 
       <div className="orders-list">
         {filteredOrders.length > 0 ? (

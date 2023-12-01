@@ -120,24 +120,15 @@ export interface Powersupply {
   wattage: number;
 }
 
-interface FormData {
-  pc_id : number;
-  product_id : number;
-  quantity : number;
-}
 
 const PcHome = () => {
   const location = useLocation();
-  const { userData, data, pcid } = location.state || {};
+  const { userData, pcid } = location.state || {};
   const [vga, setVga] = useState<Videographics[]>([]);
   const [motherboard, setMotherboard] = useState<Motherboard[]>([]);
   const [cpu, setCpu] = useState<Cpu[]>([]);
   const [cases, setCase] = useState<Case[]>([]);
-  const [formData, setFormData] = useState<FormData>({
-    pc_id: pcid,
-    product_id: -1,
-    quantity: 1,
-  });
+  
   const [powersupply, setPowersupply] = useState<Powersupply[]>([]);
 
   const [activeCategory, setActiveCategory] = useState("");
@@ -237,7 +228,6 @@ const PcHome = () => {
           </div>
         </div>
         <div className="pc-home-spacer"></div>
-        {/* ini buat cpu */}
         {activeCategory === "cpu" && (
           <div className="pc-home-content-container">
             <div className="pc-home-item-container-header">
@@ -255,7 +245,6 @@ const PcHome = () => {
           </div>
         )}
 
-        {/* ini buat Motherboard */}
         {activeCategory === "motherboard" && (
           <div className="pc-home-content-container">
             <div className="pc-home-item-container-header">
@@ -273,7 +262,6 @@ const PcHome = () => {
           </div>
         )}
 
-        {/* ini buat Videographics */}
         {activeCategory === "videographics" && (
           <div className="pc-home-content-container">
             <div className="pc-home-item-container-header">
@@ -291,7 +279,6 @@ const PcHome = () => {
           </div>
         )}
 
-        {/* ini buat Cases */}
         {activeCategory === "case" && (
           <div className="pc-home-content-container">
             <div className="pc-home-item-container-header">
@@ -309,7 +296,6 @@ const PcHome = () => {
           </div>
         )}
 
-        {/* ini buat Powersupply */}
         {activeCategory === "powersupply" && (
           <div className="pc-home-content-container">
             <div className="pc-home-item-container-header">

@@ -3,13 +3,8 @@ import "./PowersupplyComp.scss";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import {
-  Videographics,
-  Cpu,
-  Motherboard,
   Powersupply,
-  Case,
 } from "../pchome/PcHome";
-import PcHome from "../pchome/PcHome";
 
 interface PowersupplyCompProps {
   Powersupply: Powersupply;
@@ -23,7 +18,7 @@ interface FormData {
 
 const PowersupplyComp = ({ Powersupply }: PowersupplyCompProps) => {
   const location = useLocation();
-  const { userData, data, pcid } = location.state || {};
+  const { pcid } = location.state || {};
 
   const [formData, setFormData] = useState<FormData>({
     pc_id: pcid || -1,

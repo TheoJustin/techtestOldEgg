@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ShopStore.scss";
-import computer from "./../../../assets/icons/computer.png";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";

@@ -17,10 +17,6 @@ import HomeProduct from "../../components/homecomp/HomeProduct";
 import HomeBrand from "../../components/homecomp/HomeBrand";
 import HomeShop from "../../components/homecomp/HomeShop";
 
-type HomeProps = {
-  name: string;
-  email: string;
-};
 
 interface Product {
   id: number;
@@ -59,10 +55,9 @@ interface Shop {
 
 function Home() {
   const location = useLocation();
-  const { email, firstName } = location.state || {};
+  const { firstName } = location.state || {};
 
   const [current, setCurrent] = React.useState(0);
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   const [products, setProducts] = React.useState<Product[]>([]);
   const [brands, setBrands] = React.useState<Brand[]>([]);
@@ -108,7 +103,7 @@ function Home() {
   }, [current]);
 
   const goLeft = () => {
-    if (current - 1 == -1) {
+    if (current - 1 === -1) {
       setCurrent(2);
     } else {
       setCurrent((current - 1) % 3);

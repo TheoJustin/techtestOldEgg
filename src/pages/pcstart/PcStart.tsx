@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./PcStart.scss";
 import logo from "../../assets/logo_pc_builder.png";
 import Navbar from "../../components/header/Navbar";

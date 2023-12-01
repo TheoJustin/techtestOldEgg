@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./HomeProduct.scss";
 import computer from "./../../assets/icons/computer.png";
@@ -17,10 +17,6 @@ interface Product {
   urlproduct: string;
   shop_id: number;
 }
-
-type NavbarProps = {
-  firstName: string;
-};
 
 
 const HomeProduct = ({ product, firstName }: { product: Product; firstName:string }) => {

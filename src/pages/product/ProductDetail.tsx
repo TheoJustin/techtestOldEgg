@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ProductDetail.scss";
-import computer from "./../../assets/icons/computer.png";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
@@ -31,7 +30,7 @@ const ProductDetail = () => {
       .catch((error) => {
         console.error("There was an error fetching the wishlist!", error);
       });
-  }, []);
+  }, [firstName]);
   
   const handleCreateCart = () => {
     if (userData) {

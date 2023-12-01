@@ -27,19 +27,17 @@ function Signin() {
         email: email,
         password: password
       });
-      // Handle response here. For example:
       console.log("Sign in successful", response.data);
 
       if (response.data.isBanned) {
         setErrorMessage('Your account has been banned.');
-        return; // Stop the function here to prevent navigation
+        return; 
       }
       
       navigate('/home', { state: { email: response.data.email, firstName: response.data.first_name } });
     } catch (error) {
       console.error("Error during sign in:", error);
       setErrorMessage('Invalid credentials. Please try again.');
-      // Handle error (e.g., show error message to user)
     }
   }
   
