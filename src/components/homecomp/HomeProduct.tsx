@@ -32,11 +32,9 @@ const HomeProduct = ({ product, firstName }: { product: Product; firstName:strin
       const response = await axios.get(`http://localhost:8080/api/shop/${product.shop_id}`);
 
 
-      // Navigate to Shop component with the fetched data
       navigate('/shop', { state: { shopData: response.data, firstName:firstName } });
     } catch (error) {
       console.error('Error fetching shop data:', error);
-      // Handle error appropriately
     }
   };
 
@@ -45,11 +43,9 @@ const HomeProduct = ({ product, firstName }: { product: Product; firstName:strin
       const response = await axios.get(`http://localhost:8080/api/product/${product.id}`);
 
 
-      // Navigate to Shop component with the fetched data
       navigate('/product', { state: { productData: response.data, firstName:firstName } });
     } catch (error) {
       console.error('Error fetching shop data:', error);
-      // Handle error appropriately
     }
   };
 

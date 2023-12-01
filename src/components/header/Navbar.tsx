@@ -44,11 +44,9 @@ function Navbar(props: NavbarProps) {
         `http://localhost:8080/api/user/${props.firstName}`
       );
 
-      // Navigate to Shop component with the fetched data
       navigate("/wishlist", { state: { userData: response.data } });
     } catch (error) {
       console.error("Error fetching shop data:", error);
-      // Handle error appropriately
     }
   };
 
@@ -58,11 +56,9 @@ function Navbar(props: NavbarProps) {
         `http://localhost:8080/api/user/${props.firstName}`
       );
 
-      // Navigate to Shop component with the fetched data
       navigate("/pc", { state: { userData: response.data } });
     } catch (error) {
       console.error("Error fetching shop data:", error);
-      // Handle error appropriately
     }
   };
 
@@ -73,25 +69,21 @@ function Navbar(props: NavbarProps) {
         `http://localhost:8080/api/user/${props.firstName}`
       );
 
-      // Navigate to Shop component with the fetched data
       navigate("/cart", { state: { userData: response.data } });
     } catch (error) {
       console.error("Error fetching shop data:", error);
-      // Handle error appropriately
     }
   };
 
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/product/name/nama_produk`
+        `http://localhost:8080/api/product/name/${searchInput}`
       );
 
-      // Navigate to Shop component with the fetched data
-      navigate("/cart", { state: { userData: response.data } });
+      navigate('/product', { state: { productData: response.data, firstName:props.firstName } });
     } catch (error) {
       console.error("Error fetching shop data:", error);
-      // Handle error appropriately
     }
   };
 
@@ -114,6 +106,8 @@ function Navbar(props: NavbarProps) {
   const help = ["HELP CENTER", "PUSAT BANTUAN"];
   const flag = [uk, indonesia];
 
+  const [searchInput, setSearchInput] = useState('');
+
   return (
     <div className="navbar">
       <div className="topnav">
@@ -129,8 +123,8 @@ function Navbar(props: NavbarProps) {
         </div>
 
         <div className="search">
-          <input type="text" />
-          <div className="searchclick">
+          <input type="text" name="search" className="search-clicked" onChange={(e) => setSearchInput(e.target.value)}/>
+          <div className="searchclick" onClick={handleSearch}>
             <img className="image" src={search} alt="" />
           </div>
         </div>
