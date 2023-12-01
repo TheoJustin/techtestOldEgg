@@ -14,6 +14,7 @@ import Cart from './pages/cart/Cart';
 import PcStart from './pages/pcstart/PcStart';
 import PcHome from './pages/pchome/PcHome';
 import Pcparts from './pages/pcparts/Pcparts';
+import Admin from './pages/admin/Admin';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path='/pc' element={<PcStart/>}/>
           <Route path='/pc/home' element={<PcHome/>}/>
           <Route path='/pc/parts' element={<Pcparts/>}/>
+          <Route path='/admin' element={<Admin/>}/>
         </Routes>
       </Router>
     </div>

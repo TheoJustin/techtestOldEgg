@@ -1,0 +1,121 @@
+.admin-page {
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+
+    &-text{
+        font-weight: bold;
+        font-size: 1.2vw;
+        font-style: italic;
+    }
+
+    .admin-page-container-shop {
+        margin-top: 20px;
+    
+        &-header {
+          font-size: 20px;
+          color: #333;
+          margin-bottom: 15px;
+          border-bottom: 2px solid #eee;
+          padding-bottom: 10px;
+        }
+    
+        &-box {
+          .shop-details {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+    
+            p {
+              margin: 5px 0;
+              color: #666;
+              font-size: 16px;
+    
+              &:first-child {
+                color: #333;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+
+    .admin-navbar {
+        background-color: #f8f8f8;
+        padding: 10px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    
+        button {
+          margin: 0 15px;
+          padding: 8px 20px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+    
+          &:hover {
+            background-color: #0056b3;
+          }
+    
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+          }
+        }
+      }
+  
+    &-text {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  
+    &-container-user {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: auto;
+      max-width: 600px;
+  
+      &-header {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+  
+      &-box {
+        .user-details {
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+  
+          p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 16px;
+  
+            &:first-child {
+              color: #333;
+              font-weight: bold;
+            }
+          }
+  
+          &:nth-child(odd) {
+            background-color: #f9f9f9;
+          }
+        }
+      }
+    }
+  }
+  
